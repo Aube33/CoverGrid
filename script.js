@@ -82,7 +82,7 @@ let trackLimit=100
 const _getToken = async () => {
 
     const result = await fetch('https://accounts.spotify.com/api/token', {
-        method: 'POST',
+        method: 'GET',
         headers: {
             'Content-Type' : 'application/x-www-form-urlencoded', 
             'Authorization' : 'Basic ' + btoa("84d18b8414d341ac955361219c178813" + ':' + "025864421624491990d474426b484749")
