@@ -1,6 +1,6 @@
-#ALBUMS COVER GRID GENERATOR
+# ALBUMS COVER GRID GENERATOR
 
-##Create your own wallpaper for your phone with a cool grid of your favorites albums cover !
+## Create your own wallpaper for your phone with a cool grid of your favorites albums cover !
 
 [Click on me](https://aube33.github.io/) to access !
 
