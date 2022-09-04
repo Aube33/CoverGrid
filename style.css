@@ -1,0 +1,397 @@
+/*===== Basics =====*/
+:root {
+    --primary-color: #1E1E1F;
+    --secondary-color: #f7f7f7;
+    --transparent-color: #cccccc;
+    --real-transparent: rgba(255, 255, 255, 0.2);
+    --color-1: #083A4B;
+
+    --grid-cols: 4;
+}
+
+@font-face {
+    font-family: 'Grid'; /*a name to be used later*/
+    src: url('font/grid.ttf'); /*URL to font*/
+}
+@font-face {
+    font-family: 'DejaVuSans'; /*a name to be used later*/
+    src: url('font/DejaVuSans.ttf'); /*URL to font*/
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    font-family: DejaVuSans;
+}
+
+body{
+    background-color: var(--primary-color);
+}
+
+input,textarea,button,select,a {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+button:disabled {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.0);
+  }
+
+label{
+    font-family: DejaVuSans;
+    color: var(--secondary-color);
+    font-size: 1.1rem;
+    margin-bottom: 3px;
+}
+label[for=randomize-playlist]{
+    margin: 0;
+    display: inline-block;
+    text-align: right;
+    margin-left: 5px;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {  
+   appearance: none;
+}
+
+
+/*===== Basics ++ =====*/
+.jscolor{
+    border: 1px white solid;
+    font-family: DejaVuSans;
+}
+.jscolor:focus{
+    outline: none;
+}
+
+.title{
+    color: white;
+    font-family: Grid;
+    font-size: 5.5rem;
+    text-align: center;
+}
+
+hr{
+    border: 2px solid var(--transparent-color);
+    border-radius: 5px;
+    width: 10%;
+    margin: 30px 0;
+}
+
+.hide{
+    visibility: hidden;
+}
+
+.btn{
+    background-color: white;
+    border: none;
+    color: black;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 1.1rem;
+    font-family: DejaVuSans;
+    font-weight: bold; 
+    border-radius: 20px;
+    text-decoration: none;
+    transition: scale 0.2s;
+    cursor: pointer;
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 7px 29px 0px;
+}
+.btn:hover, .btn:focus , .btn:active{
+    outline: none;
+}
+.btn:disabled{
+    opacity: 0.5;
+
+}
+.btn.menu{
+    box-shadow: none;
+    font-size: 1.7rem;
+    font-weight: normal;
+    background-color: transparent;
+    color: var(--secondary-color);
+    width: fit-content;
+    padding: 0;
+    border-radius: 0;
+}
+
+
+/*===== Content Main =====*/
+.content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+/*===== Home =====*/
+.content #home{
+    display: flex;
+    visibility: visible;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 40%;
+}
+
+/*===== App =====*/
+.content #app{
+    display: none;
+    visibility: hidden;
+    position: absolute;
+    background-color: var(--color-1);
+
+    background-color: var(--color-1);
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#app #btn-app-menu{
+    border-radius: 0;
+    border-bottom-right-radius: 50%;
+    border-bottom-left-radius: 20%;
+    border-top-right-radius: 20%;
+    padding: 10px 10px;
+    position: fixed;
+    font-size: 1.4rem;
+    top: 0px;
+    left: 0px;
+    z-index: 98;
+}
+
+#app-menu-example{
+    display: grid;
+    justify-content: center;
+    gap: 0px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 2, 1fr;
+    width: 100%;
+    height: fit-content;
+    margin: 10% 0;
+    background-color: var(--primary-color);
+    transition: all 0.1s;
+}
+#app-menu-example>div{
+    background-color: var(--secondary-color);
+    /*box-shadow: rgba(194, 194, 194, 0.4) 5px 5px, rgba(194, 194, 119416, 0.3) 10px 10px, rgba(194, 194, 194, 0.2) 15px 15px;*/
+    aspect-ratio: 1;
+    border: 2px var(--transparent-color) solid;
+}
+
+#app #app-menu .group{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-left: 8%;
+}
+
+#app #app-menu{
+    background-color: var(--primary-color);
+    height: 100%;
+    width: 100%;
+    z-index: 99;
+    position: fixed;
+    right: 100%;
+    top: 0;
+    transition: right 0.2s;
+    display: flex;
+    visibility: hidden;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#app-menu_spotify{
+    margin-top: 10%;
+    margin-left: 10%;
+}
+#app-menu_spotify input[type="text"]{
+    width: 130%;
+    font-family: DejaVuSans;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    padding: 7px 7px;
+    margin-bottom: 15px;
+}
+#app-menu_spotify input[type="text"]:focus{
+    outline: none;
+}
+
+#app-menu_settings{
+    margin-top: 10%;
+    margin-left: 10%;
+}
+#app-menu_settings input[type="range"]{
+    width: 140%;
+    margin-bottom: 10px;
+}
+#app-menu_settings input[type="color"]{
+    width: 140%;
+}
+
+#app-menu-close{
+    font-size: 1.7rem;
+    border-radius: 15px;
+    padding: 100% 8px;
+    box-shadow: none;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    background-color: var(--real-transparent);
+    color: var(--secondary-color);
+}
+
+
+#app #app-content{
+    width: 100%;
+    height: 100%;
+    background-color: var(--primary-color);
+
+    display: grid;
+    justify-content: center;
+    gap: 0px;
+    grid-template-columns: repeat(var(--grid-cols), 1fr);
+    grid-auto-rows: 1fr;
+}
+  
+.grid-cell {
+    text-align: center;
+    background-color: transparent;
+    color: var(--secondary-color);
+    font-size: 2rem;
+    padding: 0 0;
+    margin: 0;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+  }
+
+.grid-cell img{
+    shape-rendering: auto;
+    max-height: 100%;
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 30;
+  }
+
+
+#app-selectionner{
+    display: none;
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+
+    width: 100vw;
+    height: 100vh;
+    z-index: 97;
+    background-color: rgba(0, 0, 0, 0.7);
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#app-selectionner .group{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 97%;
+    background-color: var(--primary-color);
+    padding: 20px 0;
+    border-radius: 10px;
+    height: fit-content;
+    max-height: 60%;
+    margin-bottom: 20%;
+}
+#app-selectionner .group input[type="text"]{
+    font-family: DejaVuSans;
+    font-weight: bold;
+    border-radius: 8px;
+    border: none;
+    padding: 7px 17px;
+    width: 75%;
+}
+#app-selectionner .group input[type="text"]:focus{
+    outline: none;
+}
+
+#app-selectionner .group .img-container{
+    margin-top: 7%;
+    width: 50%;
+    height: auto;
+    border: none;
+}
+#app-selectionner .group .img-container img{
+    object-fit: cover;
+    max-height: 100%;
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+#app-selectionner .group .btn{
+    border-radius: 13px;
+    padding: 10px 25px;
+    margin: 0 20px;
+}
+#app-selectionner .group .selectionner-btns{
+    margin-top: 6%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#app-selectionner #selectionner-select_list{
+    background-color: var(--secondary-color);
+    width: 90%;
+    height: fit-content;
+    max-height: 50%;
+
+    position: absolute;
+    top: 32%;
+    display: none;
+    visibility: hidden;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 8px 3px 5px;
+    overflow: hidden;
+    overflow-y: scroll;
+    border-radius: 10px;
+}
+#app-selectionner #selectionner-select_list .select_list-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin: 5px 0;
+    border: 2px var(--transparent-color) solid;
+}
+#app-selectionner #selectionner-select_list .img-container{
+    padding: 0;
+    margin: 0;
+    width: 65px;
+    height: 65px;
+    border-radius: 0;
+    border: none;
+}
+#app-selectionner #selectionner-select_list .img-container img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+#app-selectionner #selectionner-select_list .select_list-container .select_list-container-infos{
+    margin-left: 5%;
+}

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Cover Grid</title>
+        <link rel="stylesheet" href="style.css">
+        <script src="https://kit.fontawesome.com/aed1ad2389.js" crossorigin="anonymous"></script>
+        <script src="js/jscolor.js"></script>
+    </head>
+    <body>
+        <div class="content">
+            <div id="home">
+                <h1 class="title">COVER GRID</h1>
+                <hr>
+                <button class="btn" id="btn-launchApp">Let's Make ! <i class="fa-solid fa-arrow-right"></i></button>
+                <div id="home-creations">
+
+                </div>
+            </div>
+
+            <div id="app">
+                <canvas id="canvas" style="display: none; visibility: hidden; z-index: 98; position: absolute; top: 0;"></canvas>
+                <button class="btn" id="btn-app-menu"><i id="btn-app-menu_icon" class="fa-solid fa-chevron-right"></i></i></button>
+                <div id="app-menu">
+                    <div class="group">
+                        <div id="app-menu-example">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                        <p class="btn menu"><i class="fa-brands fa-spotify"></i> Spotify</p>
+                        <div class="group" id="app-menu_spotify">
+                            <input type="text" id="app-spotify-playlist" placeholder="Spotify playlist URL">
+
+                            <div class="container">
+                                <input type="checkbox" id="app-playlist-random" name="randomize-playlist" checked>
+                                <label for="randomize-playlist" id="app-playlist-random_label">Randomize</label>
+                            </div>
+                        </div>
+                        <hr>
+                        <p class="btn menu"><i class="fa-solid fa-gear"></i> Settings</p>
+                        <div class="group" id="app-menu_settings">
+                            <label for="columnsRange" id="app-settings-columnsRange_label">Columns: 4</label>
+                            <input type="range" id="app-settings-columnsRange" name="columnsRange" min="1" max="10" value="4" step="1">
+
+                            <label for="gapValue" id="app-settings-gapValue_label">Gap size: 0px</label>
+                            <input type="range" id="app-settings-gapValue" name="gapValue" min="0" max="20" value="0" step="1">
+
+                            <label for="backColor" id="app-settings-backColor_label">Background:</label>
+                            <!--<input type="color" id="app-settings-backColor" name="backColor" value="#1E1E1F">-->
+                            <input class="jscolor" id="app-settings-backColor" name="backColor" value="#1E1E1F" data-jscolor="{}">
+                        </div>
+                        <hr>
+                        <button class="btn menu" id="app-menu-export"><i class="fa-solid fa-file-image"></i> Export</button>
+                        <hr>
+                        <button class="btn menu" id="app-menu-home"><i class="fa-solid fa-house"></i> Home</button>
+                    </div>
+                    <button id="app-menu-close" class="btn"><i class="fa-solid fa-chevron-left"></i></button>
+                </div>
+                <div id="app-content">
+
+                </div>
+                <div id="app-selectionner" data-selectID="0">
+                    <div class="group">
+                        <input type="text" id="selectionner-textarea" placeholder="Enter album's name">
+                        <div class="img-container">
+                            <img src="img/default_cover.png" id="selectionner-visualize" alt="Cover Img">
+                        </div>
+                        <div class="selectionner-btns">
+                            <button id="app-selectionner-delete" class="btn">Remove <i class="fa-solid fa-trash-can"></i></button>
+                            <button id="app-selectionner-chose" class="btn">Select <i class="fa-solid fa-check"></i></button>
+                        </div>
+
+                        <div id="selectionner-select_list">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
+    </body>
+</html>
