@@ -4,4 +4,4 @@
 
 [Click on me](https://aube33.github.io/) to access !
 
-![Cool cover grid](https://cdn.discordapp.com/attachments/896506966074081300/1016079968628908104/gridcover.png)
+[See example](https://cdn.discordapp.com/attachments/896506966074081300/1016079968628908104/gridcover.png)
