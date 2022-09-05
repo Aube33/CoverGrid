@@ -289,7 +289,7 @@ INPUT_gapSize.addEventListener("input", function(e) {
 //Background Color
 var INPUT_backgroundColor=document.getElementById("app-settings-backColor");
 INPUT_backgroundColor.addEventListener("input", function(e) {
-    appContent.style.backgroundColor=INPUT_backgroundColor.value;
+    appGlobal.style.backgroundColor=INPUT_backgroundColor.value;
     document.getElementById("app-menu-example").style.backgroundColor=INPUT_backgroundColor.value;
 })
 
