@@ -289,8 +289,9 @@ INPUT_gapSize.addEventListener("input", function(e) {
 //Background Color
 var INPUT_backgroundColor=document.getElementById("app-settings-backColor");
 INPUT_backgroundColor.addEventListener("input", function(e) {
-    appGlobal.style.backgroundColor=INPUT_backgroundColor.value;
-    document.getElementById("app-menu-example").style.backgroundColor=INPUT_backgroundColor.value;
+    let color=INPUT_backgroundColor.value;
+    appContent.style.backgroundColor=color;
+    document.getElementById("app-menu-example").style.backgroundColor=color;
 })
 
 
@@ -472,33 +473,41 @@ BTN_export.addEventListener("click", function(e){
     let posY=0;
     let maxWidth=screen.width*4;
     let maxHeight=screen.height*4;
-    let lastSize=0;
+
+    let lastHeightSize=0;
+    let lastWidthtSize=0;
     let HeighToIncrement=0;
+    let WidthToIncrement=0;
 
     for(let i=0; i<appContent.children.length; i++){
         let coverImg=appContent.children[i].querySelector("img");
 
-        if(coverImg==undefined) HeighToIncrement=lastSize;
+        if(coverImg==undefined) {
+            WidthToIncrement=lastWidthtSize;
+            HeighToIncrement=lastHeightSize;
+        }
         else {
+            WidthToIncrement=coverImg.width*4;
+            lastWidthtSize=coverImg.width*4;
+
             HeighToIncrement=coverImg.height*4;
-            lastSize=coverImg.height*4;
+            lastHeightSize=coverImg.height*4;
         }
 
         if(posX>=maxWidth){
             posX=0;
-            //posY+=screen.height*4/GridRows;
-            posY+=HeighToIncrement;
+            posY+=HeighToIncrement+INPUT_gapSize.value*4;
         }
         if(posY>maxHeight){
             posY=0;
         }
 
         if(coverImg==null){
-            posX+=screen.width*4/GridColumns;
+            posX+=WidthToIncrement+INPUT_gapSize.value*4;
         }
         else{
             ctx.drawImage(coverImg, posX, posY, coverImg.width*4, coverImg.height*4);
-            posX+=screen.width*4/GridColumns;
+            posX+=WidthToIncrement+INPUT_gapSize.value*4;
         }
     }
 

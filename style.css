@@ -4,18 +4,19 @@
     --secondary-color: #f7f7f7;
     --transparent-color: #cccccc;
     --real-transparent: rgba(255, 255, 255, 0.2);
-    --color-1: #083A4B;
+
+    --color-1: #1ed760;
 
     --grid-cols: 4;
 }
 
 @font-face {
-    font-family: 'Grid'; /*a name to be used later*/
-    src: url('font/grid.ttf'); /*URL to font*/
+    font-family: 'Grid';
+    src: url('font/grid.ttf');
 }
 @font-face {
-    font-family: 'DejaVuSans'; /*a name to be used later*/
-    src: url('font/DejaVuSans.ttf'); /*URL to font*/
+    font-family: 'DejaVuSans';
+    src: url('font/DejaVuSans.ttf');
 }
 
 *{
@@ -24,12 +25,9 @@
     font-family: DejaVuSans;
 }
 
-body{
-    background-color: var(--primary-color);
-}
-
 input,textarea,button,select,a {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    outline: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
 }
 button:disabled {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0.0);
@@ -38,14 +36,8 @@ button:disabled {
 label{
     font-family: DejaVuSans;
     color: var(--secondary-color);
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     margin-bottom: 3px;
-}
-label[for=randomize-playlist]{
-    margin: 0;
-    display: inline-block;
-    text-align: right;
-    margin-left: 5px;
 }
 
 input[type=number]::-webkit-inner-spin-button, 
@@ -53,16 +45,91 @@ input[type=number]::-webkit-outer-spin-button {
    appearance: none;
 }
 
-
-/*===== Basics ++ =====*/
-.jscolor{
-    border: 1px white solid;
-    font-family: DejaVuSans;
-}
-.jscolor:focus{
+/*= Range inputs =*/
+input[type=range]{
+    -webkit-appearance: none;
+    appearance: none;
+    margin: 8px 0;
+    width: 100%;
+    height: 5px;
+    border-radius: 10px;
+    background: var(--real-transparent);
     outline: none;
 }
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-1);
+    cursor: pointer;
+  }
+input[type=range]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-1);
+    cursor: pointer;
+  }
 
+/*= Checkbox inputs =*/
+.check {
+    display: block;
+    position: relative;
+    padding-left: 9%;
+    cursor: pointer;
+    font-size: 1.1rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+.check input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  } 
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 23px;
+    width: 23px;
+    background-color: white;
+    border-radius: 2px;
+    border: none;
+  }
+.check:hover input ~ .checkmark {
+    background-color: var(--real-transparent);
+  }
+.check input:checked ~ .checkmark {
+    background-color: var(--color-1);
+  }
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+.check input:checked ~ .checkmark:after {
+    display: block;
+  }
+.check .checkmark:after {
+    left: 35%;
+    top: 20%;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+
+/*===== Basics ++ =====*/
 .title{
     color: white;
     font-family: Grid;
@@ -75,10 +142,6 @@ hr{
     border-radius: 5px;
     width: 10%;
     margin: 30px 0;
-}
-
-.hide{
-    visibility: hidden;
 }
 
 .btn{
@@ -96,22 +159,9 @@ hr{
     cursor: pointer;
     box-shadow: rgba(255, 255, 255, 0.2) 0px 7px 29px 0px;
 }
-.btn:hover, .btn:focus , .btn:active{
-    outline: none;
-}
 .btn:disabled{
     opacity: 0.5;
 
-}
-.btn.menu{
-    box-shadow: none;
-    font-size: 1.7rem;
-    font-weight: normal;
-    background-color: transparent;
-    color: var(--secondary-color);
-    width: fit-content;
-    padding: 0;
-    border-radius: 0;
 }
 
 
@@ -134,6 +184,8 @@ hr{
     justify-content: center;
     align-items: center;
     height: 100%;
+
+    background-color: var(--primary-color);
 }
 .content #home>.btn{
     margin-bottom: 10px;
@@ -151,6 +203,17 @@ hr{
     padding: 0;
 }
 
+/*=== App Menu ===*/
+.btn.menu{
+    box-shadow: none;
+    font-size: 1.7rem;
+    font-weight: normal;
+    background-color: transparent;
+    color: var(--secondary-color);
+    width: fit-content;
+    padding: 0;
+    border-radius: 0;
+}
 #app #btn-app-menu{
     border-radius: 0;
     border-bottom-right-radius: 50%;
@@ -164,33 +227,12 @@ hr{
     z-index: 98;
 }
 
-#app-menu-example{
-    display: grid;
-    justify-content: center;
-    gap: 0px;
-    grid-template-columns: repeat(3, 1fr);
-    grid-auto-rows: 2, 1fr;
-    width: 100%;
-    height: fit-content;
-    margin: 10% 0;
-    background-color: var(--primary-color);
-    transition: all 0.1s;
-}
-#app-menu-example>div{
-    background-color: var(--secondary-color);
-    /*box-shadow: rgba(194, 194, 194, 0.4) 5px 5px, rgba(194, 194, 119416, 0.3) 10px 10px, rgba(194, 194, 194, 0.2) 15px 15px;*/
-    aspect-ratio: 1;
-    border: 2px var(--transparent-color) solid;
-}
-
-#app #app-menu .group{
+#app-menu{
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    padding-left: 8%;
-}
+    visibility: hidden;
+    flex-direction: row;
+    justify-content: space-between;
 
-#app #app-menu{
     background-color: var(--primary-color);
     height: 100%;
     width: 100%;
@@ -199,18 +241,52 @@ hr{
     right: 100%;
     top: 0;
     transition: right 0.2s;
+}
+#app-menu .group{
     display: flex;
-    visibility: hidden;
-    flex-direction: row;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 100%;
+    height: 100%;
+    padding-left: 7.5%;
+}
+#app-menu>.group{
+    padding: 0 0;
+    padding-left: 7.5%;
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
-#app-menu_spotify{
+/*= Grid preview example =*/
+#app-menu #app-menu-example{
+    display: grid;
+    justify-content: center;
+    gap: 0px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 2, 1fr;
+    width: 90%;
+    height: fit-content;
+    margin-bottom: 10%;
+    background-color: var(--primary-color);
+    transition: all 0.1s;
+
     margin-top: 10%;
-    margin-left: 10%;
 }
-#app-menu_spotify input[type="text"]{
-    width: 130%;
+#app-menu-example>div{
+    background-color: var(--secondary-color);
+    box-shadow: rgba(194, 194, 194, 0.4) 5px 5px;
+    aspect-ratio: 1;
+    border: 2px var(--transparent-color) solid;
+    border-radius: 5px;
+}
+
+
+/*= Spotify Integration =*/
+#app-menu #app-menu_spotify{
+    margin-top: 10%;
+}
+#app-menu #app-menu_spotify input[type="text"]{
+    width: 80%;
     font-family: DejaVuSans;
     font-weight: bold;
     border-radius: 8px;
@@ -218,22 +294,34 @@ hr{
     padding: 7px 7px;
     margin-bottom: 15px;
 }
-#app-menu_spotify input[type="text"]:focus{
-    outline: none;
-}
 
+
+/*= Grid Settings =*/
 #app-menu_settings{
     margin-top: 10%;
-    margin-left: 10%;
 }
-#app-menu_settings input[type="range"]{
-    width: 140%;
-    margin-bottom: 10px;
+#app-menu_settings input{
+    width: 80%;
+    margin-bottom: 18px;
 }
-#app-menu_settings input[type="color"]{
-    width: 140%;
+#app-menu_settings input[type=color]{
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    height: 10rem;
+    padding: 0;
+    width: 10rem;
+    border-radius: 50%;
+}
+#app-menu_settings input[type=color]::-webkit-color-swatch{
+    border-radius: 50%;
+    border: 2px white solid;
 }
 
+/*= Menu close =*/
 #app-menu-close{
     font-size: 1.7rem;
     border-radius: 15px;
@@ -244,12 +332,13 @@ hr{
     background-color: var(--real-transparent);
     color: var(--secondary-color);
 }
+/*======*/
 
 
 #app #app-content{
     width: 100%;
     height: 100%;
-    background-color: transparent;
+    background-color: var(--primary-color);
 
     display: grid;
     justify-content: center;
