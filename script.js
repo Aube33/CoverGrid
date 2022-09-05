@@ -292,6 +292,7 @@ INPUT_backgroundColor.addEventListener("input", function(e) {
     let color=INPUT_backgroundColor.value;
     appContent.style.backgroundColor=color;
     document.getElementById("app-menu-example").style.backgroundColor=color;
+    document.body.style.background=color;
 })
 
 

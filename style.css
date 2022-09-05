@@ -165,6 +165,11 @@ hr{
 }
 
 
+
+body{
+    background-color: var(--primary-color);
+}
+
 /*===== Content Main =====*/
 .content{
     display: flex;
@@ -277,7 +282,6 @@ hr{
     box-shadow: rgba(194, 194, 194, 0.4) 5px 5px;
     aspect-ratio: 1;
     border: 2px var(--transparent-color) solid;
-    border-radius: 5px;
 }
 
 
