@@ -535,10 +535,13 @@ BTN_export.addEventListener("click", function(e){
     progressBar=100;
     download(canvas);
 
-    
-    loader.style.display="none";
-    loader.style.visibility="hidden";
-    progressBar.value=0;
+
+    function ProgressBarEffect() {
+        loader.style.display="none";
+        loader.style.visibility="hidden";
+        progressBar.value=0;
+    }
+    setTimeout(ProgressBarEffect, 1000);
 
     function CooldownExport() {
         BTN_export.disabled=false;
