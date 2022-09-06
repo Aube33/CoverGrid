@@ -99,7 +99,7 @@ async function getJsonPlaylist(playlistID, offset) {
     let response = await fetch('https://api.spotify.com/v1/playlists/'+playlistID+ "/tracks?limit=100&offset="+offset, {
         method: 'GET',
         headers: { 'Authorization' : 'Bearer '+token}
-    });
+    })
     let data = await response.json()
     return data;
 }
@@ -112,7 +112,7 @@ TEXT_appMenu_SPOTIFY.addEventListener("keydown", async function(e){
 
     let playlistID=TEXT_appMenu_SPOTIFY.value.split("/");
     playlistID=playlistID[playlistID.length-1];
-
+    playlistID=playlistID.split("?")[0];
     let playlistData=await getJsonPlaylist(playlistID, 0);
     if(playlistData.total>trackLimit){
         LoopsNeeded=Math.floor(playlistData.total/trackLimit);
@@ -274,7 +274,7 @@ INPUT_ColumnsRange.addEventListener("input", function(e) {
     let cellsToEdit=(GridColumns*GridRows)-appContent.childElementCount;
     makeRows(cellsToEdit);
 
-})
+});
 
 //Gap
 var INPUT_gapSize=document.getElementById("app-settings-gapValue");
@@ -284,7 +284,7 @@ INPUT_gapSize.addEventListener("input", function(e) {
     appContent.style.gap=INPUT_gapSize.value+"px";
 
     document.getElementById("app-menu-example").style.gap=INPUT_gapSize.value+"px";
-})
+});
 
 //Background Color
 var INPUT_backgroundColor=document.getElementById("app-settings-backColor");
@@ -293,7 +293,15 @@ INPUT_backgroundColor.addEventListener("input", function(e) {
     appContent.style.backgroundColor=color;
     document.getElementById("app-menu-example").style.backgroundColor=color;
     document.body.style.background=color;
-})
+});
+
+
+//Export quality
+var INPUT_exportQuality=document.getElementById("app-settings-qualityValue");
+var ExportQualitySteps=["Low", "Medium", "Good", "Very good"]
+INPUT_exportQuality.addEventListener("input", function(e) {
+    document.getElementById("app-settings-qualityValue_label").innerHTML='Export quality: '+ExportQualitySteps[INPUT_exportQuality.value-1];
+});
 
 
 //= Menu Buttons =
@@ -464,16 +472,21 @@ var ctx=canvas.getContext("2d");
 
 var BTN_export=document.getElementById("app-menu-export");
 BTN_export.addEventListener("click", function(e){
-    canvas.width=screen.width*4;
-    canvas.height=screen.height*4;
+    BTN_export.disabled=true;
+
+
+    let ExportQuality=INPUT_exportQuality.value;
+
+    canvas.width=screen.width*ExportQuality;
+    canvas.height=screen.height*ExportQuality;
 
     ctx.fillStyle = appContent.style.backgroundColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     let posX=0;
     let posY=0;
-    let maxWidth=screen.width*4;
-    let maxHeight=screen.height*4;
+    let maxWidth=screen.width*ExportQuality;
+    let maxHeight=screen.height*ExportQuality;
 
     let lastHeightSize=0;
     let lastWidthtSize=0;
@@ -488,30 +501,36 @@ BTN_export.addEventListener("click", function(e){
             HeighToIncrement=lastHeightSize;
         }
         else {
-            WidthToIncrement=coverImg.width*4;
-            lastWidthtSize=coverImg.width*4;
+            WidthToIncrement=coverImg.width*ExportQuality;
+            lastWidthtSize=coverImg.width*ExportQuality;
 
-            HeighToIncrement=coverImg.height*4;
-            lastHeightSize=coverImg.height*4;
+            HeighToIncrement=coverImg.height*ExportQuality;
+            lastHeightSize=coverImg.height*ExportQuality;
         }
 
         if(posX>=maxWidth){
             posX=0;
-            posY+=HeighToIncrement+INPUT_gapSize.value*4;
+            posY+=HeighToIncrement+INPUT_gapSize.value*ExportQuality;
         }
         if(posY>maxHeight){
             posY=0;
         }
 
         if(coverImg==null){
-            posX+=WidthToIncrement+INPUT_gapSize.value*4;
+            posX+=WidthToIncrement+INPUT_gapSize.value*ExportQuality;
         }
         else{
-            ctx.drawImage(coverImg, posX, posY, coverImg.width*4, coverImg.height*4);
-            posX+=WidthToIncrement+INPUT_gapSize.value*4;
+            ctx.drawImage(coverImg, posX, posY, coverImg.width*ExportQuality, coverImg.height*ExportQuality);
+            posX+=WidthToIncrement+INPUT_gapSize.value*ExportQuality;
         }
     }
 
     download(canvas);
+
+
+    function CooldownExport() {
+        BTN_export.disabled=false;
+    }
+    setTimeout(CooldownExport, 4000);
 });
 //==========

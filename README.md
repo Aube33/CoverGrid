@@ -14,8 +14,9 @@
   [See example](https://cdn.discordapp.com/attachments/896506966074081300/1016079968628908104/gridcover.png)
 
 ## ✅ **Roadmap** :
-  - ▢ Better background color picker
-  - ▢ Export quality parameter
+  - ✅ Better background color picker
+  - ✅ Export quality parameter
   - ▢ Compatibility with all viewport
   - ▢ Good website look
+  - ▢ Deezer implementation
   - ▢ ...

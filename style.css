@@ -260,7 +260,13 @@ body{
     padding-left: 7.5%;
     overflow-x: hidden;
     overflow-y: scroll;
+
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
+#app-menu>.group::-webkit-scrollbar {
+    display: none;
+  }
 
 /*= Grid preview example =*/
 #app-menu #app-menu-example{
@@ -323,6 +329,16 @@ body{
 #app-menu_settings input[type=color]::-webkit-color-swatch{
     border-radius: 50%;
     border: 2px white solid;
+}
+
+
+/*= Export settings =*/
+#app-menu_exportSettings{
+    margin-top: 10%;
+}
+#app-menu_exportSettings input{
+    width: 80%;
+    margin-bottom: 18px;
 }
 
 /*= Menu close =*/
@@ -470,6 +486,7 @@ body{
     align-items: center;
     margin: 5px 0;
     border: 2px var(--transparent-color) solid;
+    cursor: pointer;
 }
 #app-selectionner #selectionner-select_list .img-container{
     padding: 0;
