@@ -412,7 +412,6 @@ body{
     justify-content: center;
     align-items: center;
     user-select: none;
-    aspect-ratio: 1;
   }
 
 .grid-cell img{
