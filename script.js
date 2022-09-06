@@ -80,7 +80,6 @@ BTN_appMenu_CLOSE.addEventListener('click', (event) => {
 let trackLimit=100
 
 const _getToken = async () => {
-
     const result = await fetch('https://accounts.spotify.com/api/token', {
         method: 'POST',
         headers: {
@@ -96,7 +95,7 @@ const _getToken = async () => {
 
 async function getJsonPlaylist(playlistID, offset) {
     let token=await _getToken()
-    let response = await fetch('https://api.spotify.com/v1/playlists/'+playlistID+ "/tracks?limit=100&offset="+offset, {
+    let response = await fetch('https://api.spotify.com/v1/playlists/'+playlistID+ "/tracks?limit="+trackLimit+"&offset="+offset, {
         method: 'GET',
         headers: { 'Authorization' : 'Bearer '+token}
     })
@@ -460,6 +459,9 @@ BTN_chosedCover_REMOVE.addEventListener("click", function(e){
 
 
 //===== Exportation =====
+var loader = document.getElementById("loader");
+var progressBar = document.getElementById("loader-progressBar");
+
 var download = function(canvas){
     let link = document.createElement('a');
     link.download = 'gridcover.png';
@@ -472,8 +474,10 @@ var ctx=canvas.getContext("2d");
 
 var BTN_export=document.getElementById("app-menu-export");
 BTN_export.addEventListener("click", function(e){
-    BTN_export.disabled=true;
+    loader.style.display="flex";
+    loader.style.visibility="visible";
 
+    BTN_export.disabled=true;
 
     let ExportQuality=INPUT_exportQuality.value;
 
@@ -492,6 +496,8 @@ BTN_export.addEventListener("click", function(e){
     let lastWidthtSize=0;
     let HeighToIncrement=0;
     let WidthToIncrement=0;
+
+    let progressBarIncrementation=100/appContent.children.length;
 
     for(let i=0; i<appContent.children.length; i++){
         let coverImg=appContent.children[i].querySelector("img");
@@ -523,10 +529,16 @@ BTN_export.addEventListener("click", function(e){
             ctx.drawImage(coverImg, posX, posY, coverImg.width*ExportQuality, coverImg.height*ExportQuality);
             posX+=WidthToIncrement+INPUT_gapSize.value*ExportQuality;
         }
+        progressBar.value+=progressBarIncrementation;
     }
 
+    progressBar=100;
     download(canvas);
 
+    
+    loader.style.display="none";
+    loader.style.visibility="hidden";
+    progressBar.value=0;
 
     function CooldownExport() {
         BTN_export.disabled=false;

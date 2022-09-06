@@ -165,9 +165,42 @@ hr{
 }
 
 
-
 body{
     background-color: var(--primary-color);
+}
+
+#loader{
+    z-index: 999999;
+    display: none;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.6);
+    width: 100vw;
+    height: 100vh;
+
+    justify-content: center;
+    align-items: center;
+}
+#loader progress{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 80%;
+    height: 8px;
+    color: var(--color-1);
+}
+#loader progress::-webkit-progress-bar{
+    border-radius: 20px;
+}
+#loader progress::-webkit-progress-value{
+    background-color: var(--color-1);
+    border-radius: 20px;
+    transition: 0.2s width;
+}
+#loader progress::-moz-progress-bar{
+    background-color: var(--color-1);
+    border-radius: 20px;
 }
 
 /*===== Content Main =====*/
