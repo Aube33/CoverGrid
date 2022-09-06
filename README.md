@@ -11,10 +11,10 @@
   **→** [Click on me](https://aube33.github.io/) to access !
 
 ## 📱 **Examples** :
-  ![Example-1](https://github.com/Aube33/Aube33.github.io/blob/main/illustrations/gridcover.png?raw=true)
-  ![Example-2](https://github.com/Aube33/Aube33.github.io/blob/main/illustrations/gridcover-2.png?raw=true)
-  ![Example-3](https://github.com/Aube33/Aube33.github.io/blob/main/illustrations/gridcover-3.png?raw=true)
-  ![Example-4](https://github.com/Aube33/Aube33.github.io/blob/main/illustrations/gridcover-4.png?raw=true)
+  ![Example-1](https://github.com/Aube33/Aube33.github.io/blob/main/illustrations/gridcover.png?raw=true) |   ![Example-2](https://github.com/Aube33/Aube33.github.io/blob/main/illustrations/gridcover-2.png?raw=true)
+
+  ![Example-3](https://github.com/Aube33/Aube33.github.io/blob/main/illustrations/gridcover-3.png?raw=true) |   ![Example-4](https://github.com/Aube33/Aube33.github.io/blob/main/illustrations/gridcover-4.png?raw=true)
+
 
 ## ✅ **Roadmap** :
   - ✅ Better background color picker
