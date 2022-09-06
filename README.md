@@ -12,6 +12,7 @@
 
 ## 📱 **Examples** :
   [See example](https://cdn.discordapp.com/attachments/896506966074081300/1016079968628908104/gridcover.png)
+  ![Example-1](https://github.com/Aube33/Aube33.github.io/blob/main/illustrations/example-gridcover.png?raw=true)
 
 ## ✅ **Roadmap** :
   - ✅ Better background color picker
