@@ -209,11 +209,22 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    height: 100vh;
+    text-align: center;
+
+    width: auto;
+    height: fit-content;
 }
 
 /*===== Home =====*/
+@-webkit-keyframes downArrowAnim {
+    from { transform: translateY(0px); } 
+    to { transform: translateY(20px); }  
+}
+@keyframes downArrowAnim { 
+    from { transform: translateY(0px); } 
+    to { transform: translateY(20px); }  
+}
+
 .content #home{
     display: flex;
     visibility: visible;
@@ -221,12 +232,74 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100%;
+
+    height: fit-content;
 
     background-color: var(--primary-color);
+
+    padding-bottom: 20px;
 }
-.content #home>.btn{
+
+.content #home .container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+}
+.content #home .container>.btn{
     margin-bottom: 10px;
+}
+.content #home .container>.btn#btn-github{
+    margin-top: 5%;
+}
+
+.content #home .container>i#down-arrow{
+    margin-top: 30%;
+    color: var(--secondary-color);
+    font-size: 3rem;
+
+    -webkit-animation: ease-in-out 1s infinite alternate downArrowAnim;
+    animation: ease-in-out 1s infinite alternate downArrowAnim;
+}
+
+
+@-webkit-keyframes imagesExampleCaravel {
+    0% {content:url("illustrations/gridcover.png");}
+    33% {content:url("illustrations/gridcover-2.png");}
+    66% {content:url("illustrations/gridcover-3.png");}
+    99% {content:url("illustrations/gridcover-4.png");}
+    100% {content:url("illustrations/gridcover.png");}
+}
+@keyframes imagesExampleCaravel { 
+    0% {content:url("illustrations/gridcover.png");}
+    33% {content:url("illustrations/gridcover-2.png");}
+    66% {content:url("illustrations/gridcover-3.png");}
+    99% {content:url("illustrations/gridcover-4.png");}
+    100% {content:url("illustrations/gridcover.png");}
+}
+.content #home #home-creations{
+    justify-self: flex-end;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    background-color: red;
+    margin-top: 10%;
+    width: 90%;
+    height: fit-content;
+}
+
+.content #home #home-creations>img{
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s;
+
+    -webkit-animation: linear 18s infinite imagesExampleCaravel;
+    animation: linear 18s infinite imagesExampleCaravel;
 }
 
 /*===== App =====*/
