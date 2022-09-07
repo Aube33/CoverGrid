@@ -129,6 +129,22 @@ input[type=range]::-moz-range-thumb {
     transform: rotate(45deg);
   }
 
+@media (min-width:961px)  {
+    ::-webkit-scrollbar {
+    width: 7px;
+  }
+  ::-webkit-scrollbar-track {
+    background: none;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--real-transparent);
+    border: none;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+}
 
 /*===== Basics ++ =====*/
 #donate-button img{
@@ -140,6 +156,14 @@ input[type=range]::-moz-range-thumb {
     font-family: Grid;
     font-size: 5.5rem;
     text-align: center;
+}
+@media (min-width:961px)  {
+    .title{
+        color: white;
+        font-family: Grid;
+        font-size: 7rem;
+        text-align: center;
+    }
 }
 
 hr{
@@ -160,12 +184,20 @@ hr{
     font-weight: bold; 
     border-radius: 20px;
     text-decoration: none;
-    transition: scale 0.2s;
     cursor: pointer;
 }
 .btn:disabled{
     opacity: 0.5;
 
+}
+@media (min-width:961px)  {
+    #btn-launchApp.btn>i{
+        transition: all 0.2s;
+        padding-left: 0px;
+    }
+    #btn-launchApp.btn:hover>i{
+        padding-left: 8px;
+    }
 }
 
 
@@ -213,8 +245,9 @@ body{
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    width: 100vw;
+    width: 100%;
     height: auto;
+    background-color: var(--primary-color);
 }
 
 /*===== Home =====*/
@@ -278,6 +311,24 @@ body{
     99% {content:url("illustrations/gridcover-4.png");}
     100% {content:url("illustrations/gridcover.png");}
 }
+
+@media (min-width:961px)  {
+    @-webkit-keyframes imagesExampleCaravel {
+        0% {content:url("illustrations/gridcover_desktop.png");}
+        33% {content:url("illustrations/gridcover_desktop-2.png");}
+        66% {content:url("illustrations/gridcover_desktop-3.png");}
+        99% {content:url("illustrations/gridcover_desktop-4.png");}
+        100% {content:url("illustrations/gridcover_desktop.png");}
+    }
+    @keyframes imagesExampleCaravel { 
+        0% {content:url("illustrations/gridcover_desktop.png");}
+        33% {content:url("illustrations/gridcover_desktop-2.png");}
+        66% {content:url("illustrations/gridcover_desktop-3.png");}
+        99% {content:url("illustrations/gridcover_desktop-4.png");}
+        100% {content:url("illustrations/gridcover_desktop.png");}
+    }
+}
+
 .content #home #home-creations{
     justify-self: flex-end;
     display: flex;
@@ -324,6 +375,16 @@ body{
     padding: 0;
     border-radius: 0;
 }
+.category{
+    box-shadow: none;
+    font-size: 1.7rem;
+    font-weight: normal;
+    background-color: transparent;
+    color: var(--secondary-color);
+    width: fit-content;
+    padding: 0;
+    border-radius: 0; 
+}
 #app #btn-app-menu{
     border-radius: 0;
     border-bottom-right-radius: 50%;
@@ -352,6 +413,13 @@ body{
     top: 0;
     transition: right 0.2s;
 }
+@media (min-width:961px)  {
+    #app-menu{
+        width: 25%;
+    }
+}
+
+
 #app-menu .group{
     display: flex;
     flex-direction: column;
@@ -491,7 +559,14 @@ body{
     justify-content: center;
     align-items: center;
     user-select: none;
+    cursor: pointer;
   }
+@media (min-width:961px)  {
+    .grid-cell {
+        font-size: 2em;
+        font-weight: 100;
+    }
+}
 
 .grid-cell img{
     shape-rendering: auto;
@@ -532,6 +607,11 @@ body{
     border-radius: 10px;
     height: fit-content;
     margin-bottom: 20%;
+}
+@media (min-width:961px)  {
+    #app-selectionner .group{
+        width: 30%;
+    }
 }
 #app-selectionner .group input[type="text"]{
     font-family: DejaVuSans;
@@ -593,6 +673,12 @@ body{
     overflow: hidden;
     overflow-y: scroll;
     border-radius: 10px;
+}
+@media (min-width:961px)  {
+    #app-selectionner #selectionner-select_list{
+        width: 25%;
+        max-height: 70%;
+    }
 }
 #app-selectionner #selectionner-select_list .select_list-container{
     display: flex;

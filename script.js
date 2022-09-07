@@ -1,4 +1,10 @@
 //===== Globals variables =====
+if(screen.width>=961){
+    var DesktopMode=true;
+}
+else{
+    var DesktopMode=false;
+}
 
 //=== Accueil ===
 var homeContent=document.getElementById("home"); //Main
@@ -76,7 +82,12 @@ BTN_launchApp.innerHTML=BTN_launchApp_sentences[Math.floor(Math.random()*BTN_lau
 //= Menu Opening/Closure =
 BTN_appMenu_OPEN.addEventListener('click', (event) => {
     appMenu.style.visibility="visible";
-    appMenu.style.right="0";
+    if(screen.width>=961){
+        appMenu.style.right="75%";
+    }
+    else{
+        appMenu.style.right="0";
+    }
 });
 BTN_appMenu_CLOSE.addEventListener('click', (event) => {
     appMenu.style.right="100%";
@@ -160,8 +171,15 @@ TEXT_appMenu_SPOTIFY.addEventListener("keydown", async function(e){
 //= Settings =
 
 //Columns Value
-var GridColumns=4
-var GridRows=(GridColumns*2)+1
+if(DesktopMode){
+    var GridRows=4+1
+    var GridColumns=((GridRows-1)*2)
+}
+else{
+    var GridColumns=4
+    var GridRows=(GridColumns*2)+1
+}
+
 
 var root = document.querySelector(':root');
 root.style.setProperty('--grid-cols', GridColumns.toString());
@@ -269,6 +287,22 @@ function makeRows(cellNumber) {
             clearTimeout(Cell_HoldingTimeout);
         });
 
+        newCell.addEventListener('mousedown', function() {
+            Cell_HoldingTimeout = setTimeout(function() {
+                for(let c=0; c<appContent.children.length; c++){
+                    appContent.children[c].style.border="none";
+                }
+                newCell.style.border="2px white solid"
+                Cell_LongTouch = true;
+                Cell_LongSelected = newCell.getAttribute("data-id");
+            }, 500);
+        });
+
+        newCell.addEventListener('mouseup', function() {
+            Cell_LongTouch = false;
+            clearTimeout(Cell_HoldingTimeout);
+        });
+
         appContent.replaceChild(newCell, appContent.children[i]);
     }
 
@@ -280,8 +314,15 @@ var INPUT_ColumnsRange=document.getElementById("app-settings-columnsRange");
 INPUT_ColumnsRange.addEventListener("input", function(e) {
     document.getElementById("app-settings-columnsRange_label").innerHTML='Columns: '+INPUT_ColumnsRange.value;
 
-    GridColumns=INPUT_ColumnsRange.value;
-    GridRows=(INPUT_ColumnsRange.value*2);
+    if(DesktopMode){
+        GridRows=parseInt(INPUT_ColumnsRange.value)+1;
+        GridColumns=parseInt(INPUT_ColumnsRange.value*2);
+    }
+    else{
+        GridColumns=INPUT_ColumnsRange.value;
+        GridRows=(INPUT_ColumnsRange.value*2)+1;
+    }
+
     let cellsToEdit=(GridColumns*GridRows)-appContent.childElementCount;
     makeRows(cellsToEdit);
 
@@ -357,6 +398,13 @@ function cellsOpenSelectionner(cell){
     }
 }
 
+//Fermeture de la liste déroulante
+appCoverSelectionner.querySelector(".group").addEventListener("click", (e) => {
+    if(e.target !== appCoverSelectionner.querySelector(".group")) return;
+
+    list_appCoverSelectionner.style.display="none";
+    list_appCoverSelectionner.style.visibility="hidden";
+});
 
 //= Album choice =
 async function getJsonSearch(url) {
@@ -528,10 +576,18 @@ BTN_export.addEventListener("click", function(e){
             HeighToIncrement=lastHeightSize;
         }
         else {
-            WidthToIncrement=coverImg.width*ExportQuality;
-            lastWidthtSize=coverImg.width*ExportQuality;
+            if(DesktopMode){
+                //WidthToIncrement=screen.width*ExportQuality/GridColumns;
+                //HeighToIncrement=screen.height*ExportQuality/GridRows;
+                WidthToIncrement=coverImg.width*ExportQuality;
+                HeighToIncrement=coverImg.height*ExportQuality;
+            }
+            else{
+                WidthToIncrement=coverImg.width*ExportQuality;
+                HeighToIncrement=coverImg.height*ExportQuality;
+            }
 
-            HeighToIncrement=coverImg.height*ExportQuality;
+            lastWidthtSize=coverImg.width*ExportQuality;
             lastHeightSize=coverImg.height*ExportQuality;
         }
 
@@ -555,7 +611,6 @@ BTN_export.addEventListener("click", function(e){
 
     progressBar=100;
     download(canvas);
-
 
     function ProgressBarEffect() {
         loader.style.display="none";
