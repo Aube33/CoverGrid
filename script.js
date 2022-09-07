@@ -79,7 +79,7 @@ BTN_appMenu_CLOSE.addEventListener('click', (event) => {
 //= Spotify integration =
 let trackLimit=100
 
-const _getTokenSpotify = async () => {
+const _getToken = async () => {
     const result = await fetch('https://accounts.spotify.com/api/token', {
         method: 'POST',
         headers: {
@@ -93,8 +93,8 @@ const _getTokenSpotify = async () => {
     return data.access_token;
 }
 
-async function getJsonPlaylistSpotify(playlistID, offset) {
-    let token=await _getTokenSpotify()
+async function getJsonPlaylist(playlistID, offset) {
+    let token=await _getToken()
     let response = await fetch('https://api.spotify.com/v1/playlists/'+playlistID+ "/tracks?limit="+trackLimit+"&offset="+offset, {
         method: 'GET',
         headers: { 'Authorization' : 'Bearer '+token}
@@ -107,75 +107,6 @@ var TEXT_appMenu_SPOTIFY = document.getElementById("app-spotify-playlist");
 TEXT_appMenu_SPOTIFY.addEventListener("keydown", async function(e){
     if(e.keyCode != 13) return;
 
-    let LoopsNeeded=1;
-
-    let playlistID=TEXT_appMenu_SPOTIFY.value.split("/");
-    playlistID=playlistID[playlistID.length-1];
-    playlistID=playlistID.split("?")[0];
-    let playlistData=await getJsonPlaylistSpotify(playlistID, 0);
-    if(playlistData.total>trackLimit){
-        LoopsNeeded=Math.floor(playlistData.total/trackLimit);
-        if(playlistData.total%trackLimit!=0) LoopsNeeded+=1;
-    }
-
-    let playlistUrls=[];
-    for(let l=0; l<LoopsNeeded; l++){
-        let playlistData=await getJsonPlaylistSpotify(playlistID, l);
-        let playlistItems=playlistData.items;
-
-        for(let i=0; i<playlistItems.length; i++){
-            if(playlistUrls.includes(playlistItems[i].track.album.images[0].url)) continue;
-            playlistUrls.push(playlistItems[i].track.album.images[0].url)
-        }
-    }
-
-    if(CHECK_appMenu_randomize.checked){
-        for (let i = playlistUrls.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            const temp = playlistUrls[i];
-            playlistUrls[i] = playlistUrls[j];
-            playlistUrls[j] = temp;
-        }
-    }    
-
-    for(let c=0; c<playlistUrls.length && c<appContent.children.length; c++){
-        var cover = document.createElement("img");
-        var cover=new Image();
-        cover.crossOrigin="anonymous";
-        cover.src=playlistUrls[c];
-        appContent.children[c].innerHTML="";
-        appContent.children[c].appendChild(cover).className="grid-cell-cover";
-    }
-});
-
-
-
-//= Deezer integration =
-const _getTokenDeezer = async () => {
-    console.log("test ok")
-    const result = await fetch('https://connect.deezer.com/oauth/auth.php?app_id=558362&redirect_uri=https://aube33.github.com&perms=basic_access', {
-        method: 'POST',
-    });
-
-    const data = await result.json();
-    return data.access_token;
-}
-
-async function getJsonPlaylistDeezer(playlistID, offset) {
-    let token=await _getToken()
-    let response = await fetch('https://api.spotify.com/v1/playlists/'+playlistID+ "/tracks?limit="+trackLimit+"&offset="+offset, {
-        method: 'GET',
-        headers: { 'Authorization' : 'Bearer '+token}
-    })
-    let data = await response.json()
-    return data;
-}
-
-var TEXT_appMenu_DEEZER = document.getElementById("app-spotify-deezer");
-TEXT_appMenu_DEEZER.addEventListener("keydown", async function(e){
-    if(e.keyCode != 13) return;
-    console.log(await _getTokenDeezer())
-    /*
     let LoopsNeeded=1;
 
     let playlistID=TEXT_appMenu_SPOTIFY.value.split("/");
@@ -215,7 +146,6 @@ TEXT_appMenu_DEEZER.addEventListener("keydown", async function(e){
         appContent.children[c].innerHTML="";
         appContent.children[c].appendChild(cover).className="grid-cell-cover";
     }
-    */
 });
 
 

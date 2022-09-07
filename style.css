@@ -338,20 +338,6 @@ body{
     padding: 7px 7px;
     margin-bottom: 15px;
 }
-/*= Deezer Integration =*/
-#app-menu #app-menu_deezer{
-    margin-top: 5%;
-}
-#app-menu #app-menu_deezer input[type="text"]{
-    width: 80%;
-    font-family: DejaVuSans;
-    font-weight: bold;
-    border-radius: 8px;
-    border: none;
-    padding: 7px 7px;
-    margin-bottom: 15px;
-}
-
 
 /*= Grid Settings =*/
 #app-menu_settings{
