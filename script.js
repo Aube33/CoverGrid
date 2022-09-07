@@ -1,4 +1,3 @@
-
 //===== Globals variables =====
 
 //=== Accueil ===
@@ -30,7 +29,6 @@ var CoversQuality=3;
 //==========
 
 
-
 //===== Accueil =====
 function AppSwitch(){
     if(AppFlipFlop){
@@ -56,6 +54,16 @@ function AppSwitch(){
 BTN_launchApp.addEventListener('click', (event) => {
     AppSwitch();
 });
+
+var BTN_launchApp_sentences=[
+    "Start your adventure !",
+    "Follow the arrow !",
+    "Let's make !",
+    "Click me to start !",
+    "Let's start !",
+    "I want my grid !",
+]
+BTN_launchApp.innerHTML=BTN_launchApp_sentences[Math.floor(Math.random()*BTN_launchApp_sentences.length)]+"  <i class='fa-solid fa-arrow-right'></i>";
 //==========
 
 
@@ -298,6 +306,14 @@ INPUT_backgroundColor.addEventListener("input", function(e) {
     document.body.style.background=color;
 });
 
+//Clear button
+var BTN_clearGrid=document.getElementById("app-settings-clear");
+BTN_clearGrid.addEventListener("click", function(e) {
+    for(let c=appContent.children.length; c>0; c--) {
+        appContent.removeChild(appContent.lastElementChild);
+    } 
+    makeRows((GridColumns*GridRows));
+});
 
 //Export quality
 var INPUT_exportQuality=document.getElementById("app-settings-qualityValue");
@@ -355,6 +371,7 @@ INPUT_appCoverSelectionner_SEARCH.addEventListener("keydown", async function(e){
     if(INPUT_appCoverSelectionner_SEARCH.value.length>0){
         list_appCoverSelectionner.style.display="flex";
         list_appCoverSelectionner.style.visibility="visible";
+        list_appCoverSelectionner.style.top=INPUT_appCoverSelectionner_SEARCH.getBoundingClientRect().bottom+15+"px";
         
         let searchResult=await getJsonSearch("https://ws.audioscrobbler.com/2.0/?method=album.search&album="+INPUT_appCoverSelectionner_SEARCH.value+"&api_key=f8a956b6b162beac840f5c7c52d575c5&format=json");
         let searchResultMatches=searchResult.results.albummatches.album;

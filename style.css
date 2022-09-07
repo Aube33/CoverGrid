@@ -6,6 +6,7 @@
     --real-transparent: rgba(255, 255, 255, 0.2);
 
     --color-1: #1ed760;
+    --color-2: rgb(209, 41, 41);
 
     --grid-cols: 4;
 }
@@ -130,6 +131,10 @@ input[type=range]::-moz-range-thumb {
 
 
 /*===== Basics ++ =====*/
+#donate-button img{
+    width: 80%;
+}
+
 .title{
     color: white;
     font-family: Grid;
@@ -157,7 +162,6 @@ hr{
     text-decoration: none;
     transition: scale 0.2s;
     cursor: pointer;
-    box-shadow: rgba(255, 255, 255, 0.2) 0px 7px 29px 0px;
 }
 .btn:disabled{
     opacity: 0.5;
@@ -207,12 +211,10 @@ body{
 .content{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-
-
     width: 100vw;
-    height: 100vh;
+    height: auto;
 }
 
 /*===== Home =====*/
@@ -228,16 +230,11 @@ body{
 .content #home{
     display: flex;
     visibility: visible;
-
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     height: fit-content;
-
     background-color: var(--primary-color);
-
-    padding-top: 100vh;
     padding-bottom: 20px;
 }
 
@@ -249,6 +246,7 @@ body{
 
     height: 100vh;
 }
+
 .content #home>.container>.btn{
     margin-bottom: 10px;
 }
@@ -290,6 +288,9 @@ body{
     margin-top: 10%;
     width: 90%;
     height: fit-content;
+
+    border: 2px solid white;
+    border-radius: 5px;
 }
 
 .content #home #home-creations>img{
@@ -297,6 +298,7 @@ body{
     height: 100%;
     -webkit-animation: linear 18s infinite imagesExampleCaravel;
     animation: linear 18s infinite imagesExampleCaravel;
+    border-radius: 5px;
 }
 
 /*===== App =====*/
@@ -364,8 +366,8 @@ body{
     overflow-x: hidden;
     overflow-y: scroll;
 
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 #app-menu>.group::-webkit-scrollbar {
     display: none;
@@ -432,6 +434,13 @@ body{
 #app-menu_settings input[type=color]::-webkit-color-swatch{
     border-radius: 50%;
     border: 2px white solid;
+}
+#app-menu_settings button{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+#app-menu_settings button.danger{
+    color: var(--color-2);
 }
 
 
@@ -556,6 +565,7 @@ body{
     border-radius: 13px;
     padding: 10px 25px;
     margin: 0 20px;
+    font-size: 1rem;
 }
 #app-selectionner .group .selectionner-btns{
     margin-top: 6%;
@@ -563,6 +573,9 @@ body{
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+#app-selectionner-delete{
+    background-color: var(--color-2);
 }
 
 #app-selectionner #selectionner-select_list{

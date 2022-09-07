@@ -16,7 +16,7 @@
                 <div class="container">
                     <h1 class="title">COVER GRID</h1>
                     <hr>
-                    <button class="btn" id="btn-launchApp">Let's Make ! (Beta edition) <i class="fa-solid fa-arrow-right"></i></button>
+                    <button class="btn" id="btn-launchApp">Click me to start ! <i class="fa-solid fa-arrow-right"></i></button>
                     <a href="https://github.com/Aube33/Aube33.github.io/" class="btn" id="btn-github">Github Project <i class="fa-brands fa-github"></i></a>
                     <i class="fa-solid fa-angles-down" id="down-arrow"></i>
                 </div>
@@ -38,6 +38,23 @@
                             <div></div>
                             <div></div>
                         </div>
+
+                        <div id="donate-button-container" style="margin-bottom: 50px;">
+                            <div id="donate-button"></div>
+                            <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+                            <script>
+                                PayPal.Donation.Button({
+                                    env:'production',
+                                    hosted_button_id:'2JYXTUHK7LUPE',
+                                    image: {
+                                        src:'https://amigurumibb.com/wp-content/uploads/2018/03/PayPal-Donate-Button-Transparent.png',
+                                        alt:'Donate with PayPal button',
+                                        title:'PayPal - The safer, easier way to pay online!',
+                                    }
+                                }).render('#donate-button');
+                            </script>
+                        </div>
+
                         <p class="btn menu"><i class="fa-brands fa-spotify"></i> Spotify</p>
                         <div class="group" id="app-menu_spotify">
                             <input type="text" id="app-spotify-playlist" placeholder="Spotify playlist URL">
@@ -60,9 +77,10 @@
 
                             <label for="backColor" id="app-settings-backColor_label" style="margin-bottom: 10px;">Background color:</label>
                             <input type="color" id="app-settings-backColor" name="backColor" value="#1E1E1F">
+                            <hr>
+                            <button class="btn menu danger" id="app-settings-clear"><i class="fa-solid fa-triangle-exclamation"></i> Clear all</button>
                         </div>
                         <hr>
-
                         <button class="btn menu" id="app-menu-export"><i class="fa-solid fa-file-image"></i> Export</button>
                         <div class="group" id="app-menu_exportSettings">
                             <label for="qualityValue" id="app-settings-qualityValue_label">Export quality: Very good</label>
