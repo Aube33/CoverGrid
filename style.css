@@ -256,7 +256,7 @@ body{
 }
 
 .content #home .container>i#down-arrow{
-    margin-top: 30%;
+    margin-top: 20%;
     color: var(--secondary-color);
     font-size: 3rem;
 
@@ -281,13 +281,11 @@ body{
 }
 .content #home #home-creations{
     justify-self: flex-end;
-
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-
-    background-color: red;
+    background-color: none;
     margin-top: 10%;
     width: 90%;
     height: fit-content;
@@ -296,8 +294,6 @@ body{
 .content #home #home-creations>img{
     width: 100%;
     height: 100%;
-    transition: all 0.3s;
-
     -webkit-animation: linear 18s infinite imagesExampleCaravel;
     animation: linear 18s infinite imagesExampleCaravel;
 }
