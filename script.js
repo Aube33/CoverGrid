@@ -249,10 +249,14 @@ function makeRows(cellNumber) {
                 newCell.style.border="2px white solid"
                 Cell_LongTouch = true;
                 Cell_LongSelected = newCell.getAttribute("data-id");
-            }, 400);
+            }, 500);
         });
 
         newCell.addEventListener('touchend', function() {
+            Cell_LongTouch = false;
+            clearTimeout(Cell_HoldingTimeout);
+        });
+        newCell.addEventListener('touchmove', function() {
             Cell_LongTouch = false;
             clearTimeout(Cell_HoldingTimeout);
         });

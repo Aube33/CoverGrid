@@ -209,10 +209,10 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    text-align: center;
 
-    width: auto;
-    height: fit-content;
+
+    width: 100vw;
+    height: 100vh;
 }
 
 /*===== Home =====*/
@@ -237,10 +237,11 @@ body{
 
     background-color: var(--primary-color);
 
+    padding-top: 100vh;
     padding-bottom: 20px;
 }
 
-.content #home .container{
+.content #home>.container{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -248,14 +249,14 @@ body{
 
     height: 100vh;
 }
-.content #home .container>.btn{
+.content #home>.container>.btn{
     margin-bottom: 10px;
 }
-.content #home .container>.btn#btn-github{
+.content #home>.container>.btn#btn-github{
     margin-top: 5%;
 }
 
-.content #home .container>i#down-arrow{
+.content #home>.container>i#down-arrow{
     margin-top: 20%;
     color: var(--secondary-color);
     font-size: 3rem;
