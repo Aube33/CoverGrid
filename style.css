@@ -531,7 +531,6 @@ body{
     padding: 20px 0;
     border-radius: 10px;
     height: fit-content;
-    max-height: 60%;
     margin-bottom: 20%;
 }
 #app-selectionner .group input[type="text"]{
