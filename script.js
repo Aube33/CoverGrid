@@ -176,7 +176,7 @@ TEXT_appMenu_SPOTIFY.addEventListener("keydown", async function(e){
 
 
 //= Deezer integration =
-
+let trackLimit_Deezer=25
 const _getTokenDeezer = async () => {
     const result = await fetch('https://accounts.spotify.com/api/token', {
         method: 'POST',
@@ -193,9 +193,10 @@ const _getTokenDeezer = async () => {
 
 async function getJsonPlaylistDeezer(playlistID, offset) {
     //let token=await _getTokenDeezer()
-    let response = await fetch('https://api.deezer.com/playlist/'+playlistID+ "/tracks", {
+    let response = await fetch('https://cors-anywhere.herokuapp.com/https://api.deezer.com/playlist/'+playlistID+ "/tracks?index="+offset, {
         method: 'GET',
-        Accept: 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Accept': 'application/json',
     })
     let data = await response.json()
     return data;
@@ -212,20 +213,20 @@ TEXT_appMenu_DEEZEER.addEventListener("keydown", async function(e){
     playlistID=playlistID.split("?")[0];
     let playlistData=await getJsonPlaylistDeezer(playlistID, 0);
     console.log(playlistData)
-    return;
-    if(playlistData.total>trackLimit){
-        LoopsNeeded=Math.floor(playlistData.total/trackLimit);
-        if(playlistData.total%trackLimit!=0) LoopsNeeded+=1;
+
+    if(playlistData.total>trackLimit_Deezer){
+        LoopsNeeded=Math.floor(playlistData.total/trackLimit_Deezer);
+        if(playlistData.total%trackLimit_Deezer!=0) LoopsNeeded+=1;
     }
 
     let playlistUrls=[];
     for(let l=0; l<LoopsNeeded; l++){
         let playlistData=await getJsonPlaylistDeezer(playlistID, l);
-        let playlistItems=playlistData.items;
+        let playlistItems=playlistData.data;
 
         for(let i=0; i<playlistItems.length; i++){
-            if(playlistUrls.includes(playlistItems[i].track.album.images[0].url)) continue;
-            playlistUrls.push(playlistItems[i].track.album.images[0].url)
+            if(playlistUrls.includes(playlistItems[i].album.cover_big)) continue;
+            playlistUrls.push(playlistItems[i].album.cover_big)
         }
     }
 
