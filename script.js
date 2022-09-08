@@ -104,7 +104,7 @@ BTN_appMenu_CLOSE.addEventListener('click', (event) => {
 //= Spotify integration =
 let trackLimit=100
 
-const _getToken = async () => {
+const _getTokenSpotify = async () => {
     const result = await fetch('https://accounts.spotify.com/api/token', {
         method: 'POST',
         headers: {
@@ -118,8 +118,8 @@ const _getToken = async () => {
     return data.access_token;
 }
 
-async function getJsonPlaylist(playlistID, offset) {
-    let token=await _getToken()
+async function getJsonPlaylistSpotify(playlistID, offset) {
+    let token=await _getTokenSpotify()
     let response = await fetch('https://api.spotify.com/v1/playlists/'+playlistID+ "/tracks?limit="+trackLimit+"&offset="+offset, {
         method: 'GET',
         headers: { 'Authorization' : 'Bearer '+token}
@@ -137,7 +137,7 @@ TEXT_appMenu_SPOTIFY.addEventListener("keydown", async function(e){
     let playlistID=TEXT_appMenu_SPOTIFY.value.split("/");
     playlistID=playlistID[playlistID.length-1];
     playlistID=playlistID.split("?")[0];
-    let playlistData=await getJsonPlaylist(playlistID, 0);
+    let playlistData=await getJsonPlaylistSpotify(playlistID, 0);
     if(playlistData.total>trackLimit){
         LoopsNeeded=Math.floor(playlistData.total/trackLimit);
         if(playlistData.total%trackLimit!=0) LoopsNeeded+=1;
@@ -145,7 +145,7 @@ TEXT_appMenu_SPOTIFY.addEventListener("keydown", async function(e){
 
     let playlistUrls=[];
     for(let l=0; l<LoopsNeeded; l++){
-        let playlistData=await getJsonPlaylist(playlistID, l);
+        let playlistData=await getJsonPlaylistSpotify(playlistID, l);
         let playlistItems=playlistData.items;
 
         for(let i=0; i<playlistItems.length; i++){
@@ -172,6 +172,82 @@ TEXT_appMenu_SPOTIFY.addEventListener("keydown", async function(e){
         appContent.children[c].appendChild(cover).className="grid-cell-cover";
     }
 });
+
+
+
+//= Deezer integration =
+
+const _getTokenDeezer = async () => {
+    const result = await fetch('https://accounts.spotify.com/api/token', {
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'application/x-www-form-urlencoded', 
+            'Authorization' : 'Basic ' + btoa("84d18b8414d341ac955361219c178813" + ':' + "025864421624491990d474426b484749")
+        },
+        body: 'grant_type=client_credentials'
+    });
+
+    const data = await result.json();
+    return data.access_token;
+}
+
+async function getJsonPlaylistDeezer(playlistID, offset) {
+    //let token=await _getTokenDeezer()
+    let response = await fetch('https://api.deezer.com/playlist/'+playlistID+ "/tracks", {
+        method: 'GET',
+        Accept: 'application/json',
+    })
+    let data = await response.json()
+    return data;
+}
+
+var TEXT_appMenu_DEEZEER = document.getElementById("app-deezer-playlist");
+TEXT_appMenu_DEEZEER.addEventListener("keydown", async function(e){
+    if(e.keyCode != 13) return;
+
+    let LoopsNeeded=1;
+
+    let playlistID=TEXT_appMenu_DEEZEER.value.split("/");
+    playlistID=playlistID[playlistID.length-1];
+    playlistID=playlistID.split("?")[0];
+    let playlistData=await getJsonPlaylistDeezer(playlistID, 0);
+    console.log(playlistData)
+    return;
+    if(playlistData.total>trackLimit){
+        LoopsNeeded=Math.floor(playlistData.total/trackLimit);
+        if(playlistData.total%trackLimit!=0) LoopsNeeded+=1;
+    }
+
+    let playlistUrls=[];
+    for(let l=0; l<LoopsNeeded; l++){
+        let playlistData=await getJsonPlaylistDeezer(playlistID, l);
+        let playlistItems=playlistData.items;
+
+        for(let i=0; i<playlistItems.length; i++){
+            if(playlistUrls.includes(playlistItems[i].track.album.images[0].url)) continue;
+            playlistUrls.push(playlistItems[i].track.album.images[0].url)
+        }
+    }
+
+    if(CHECK_appMenu_randomize.checked){
+        for (let i = playlistUrls.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            const temp = playlistUrls[i];
+            playlistUrls[i] = playlistUrls[j];
+            playlistUrls[j] = temp;
+        }
+    }    
+
+    for(let c=0; c<playlistUrls.length && c<appContent.children.length; c++){
+        var cover = document.createElement("img");
+        var cover=new Image();
+        cover.crossOrigin="anonymous";
+        cover.src=playlistUrls[c];
+        appContent.children[c].innerHTML="";
+        appContent.children[c].appendChild(cover).className="grid-cell-cover";
+    }
+});
+
 
 
 //= Settings =
