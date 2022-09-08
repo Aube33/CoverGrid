@@ -296,6 +296,15 @@ body{
     animation: ease-in-out 1s infinite alternate downArrowAnim;
 }
 
+body:after{
+    position:absolute; z-index:-1;
+    visibility: hidden;
+    transform: scale(0);
+    content: url(illustrations/gridcover.png) 
+             url(illustrations/gridcover-2.png) 
+             url(illustrations/gridcover-3.png) 
+             url(illustrations/gridcover-4.png);
+}
 
 @-webkit-keyframes imagesExampleCaravel {
     0% {content:url("illustrations/gridcover.png");}
