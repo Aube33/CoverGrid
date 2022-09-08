@@ -313,6 +313,16 @@ body{
 }
 
 @media (min-width:961px)  {
+    body:after{
+        position:absolute; z-index:-1;
+        visibility: hidden;
+        transform: scale(0);
+        content: url(illustrations/gridcover_desktop.png) 
+                 url(illustrations/gridcover_desktop-2.png) 
+                 url(illustrations/gridcover_desktop-3.png) 
+                 url(illustrations/gridcover_desktop-4.png);
+    }
+
     @-webkit-keyframes imagesExampleCaravel {
         0% {content:url("illustrations/gridcover_desktop.png");}
         33% {content:url("illustrations/gridcover_desktop-2.png");}
@@ -329,7 +339,7 @@ body{
     }
 }
 
-.content #home #home-creations{
+.content #home #home-creations_phone{
     justify-self: flex-end;
     display: flex;
     flex-direction: row;
@@ -340,17 +350,56 @@ body{
     width: 90%;
     height: fit-content;
 
-    border: 2px solid white;
+    border: 2px solid var(--secondary-color);
     border-radius: 5px;
 }
-
-.content #home #home-creations>img{
-    width: 100%;
-    height: 100%;
+.content #home #home-creations_phone>img{
+    image-rendering: optimizeSpeed;
+    max-width: 100%;
+    height: auto;
     -webkit-animation: linear 18s infinite imagesExampleCaravel;
     animation: linear 18s infinite imagesExampleCaravel;
     border-radius: 5px;
 }
+
+.content #home #home-creations_desktop{
+    display: none;
+    visibility: hidden;
+
+    justify-self: flex-end;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: none;
+    margin-top: 10%;
+    width: 90%;
+    height: fit-content;
+
+    border: 1px var(--secondary-color) solid;
+    border-radius: 5px;
+}
+
+.content #home #home-creations_desktop>img{
+    image-rendering: optimizeSpeed;
+    max-width: 100%;
+    height: auto;
+    -webkit-animation: linear 18s infinite imagesExampleCaravel;
+    animation: linear 18s infinite imagesExampleCaravel;
+    border-radius: 5px;
+}
+
+@media (min-width:961px)  {
+    .content #home #home-creations_phone{
+        display: none;
+        visibility: hidden;
+    }
+
+    .content #home #home-creations_desktop{
+        display: flex;
+        visibility: visible;
+    }
+}
+
 
 /*===== App =====*/
 .content #app{

@@ -69,6 +69,12 @@ var BTN_launchApp_sentences=[
     "Let's start !",
     "I want my grid !",
 ]
+if(DesktopMode){
+    BTN_launchApp_sentences.push("Create my desktop wallpaper !");
+}
+else{
+    BTN_launchApp_sentences.push("Create my phone wallpaper !");
+}
 BTN_launchApp.innerHTML=BTN_launchApp_sentences[Math.floor(Math.random()*BTN_launchApp_sentences.length)]+"  <i class='fa-solid fa-arrow-right'></i>";
 //==========
 
@@ -558,8 +564,6 @@ BTN_export.addEventListener("click", function(e){
 
     let posX=0;
     let posY=0;
-    let maxWidth=screen.width*ExportQuality;
-    let maxHeight=screen.height*ExportQuality;
 
     let lastHeightSize=0;
     let lastWidthtSize=0;
@@ -577,10 +581,8 @@ BTN_export.addEventListener("click", function(e){
         }
         else {
             if(DesktopMode){
-                //WidthToIncrement=screen.width*ExportQuality/GridColumns;
-                //HeighToIncrement=screen.height*ExportQuality/GridRows;
-                WidthToIncrement=coverImg.width*ExportQuality;
-                HeighToIncrement=coverImg.height*ExportQuality;
+                WidthToIncrement=screen.width*ExportQuality/GridColumns;
+                HeighToIncrement=screen.height*ExportQuality/GridRows;
             }
             else{
                 WidthToIncrement=coverImg.width*ExportQuality;
@@ -591,11 +593,11 @@ BTN_export.addEventListener("click", function(e){
             lastHeightSize=coverImg.height*ExportQuality;
         }
 
-        if(posX>=maxWidth){
+        if(posX>=canvas.width){
             posX=0;
             posY+=HeighToIncrement+INPUT_gapSize.value*ExportQuality;
         }
-        if(posY>maxHeight){
+        if(posY>canvas.height){
             posY=0;
         }
 
