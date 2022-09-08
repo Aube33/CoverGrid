@@ -17,7 +17,7 @@
 ## ✅ **Roadmap** :
   - ✅ Better background color picker
   - ✅ Export quality parameter
-  - ▢ Compatibility with all viewport
-  - ▢ Good website look
+  - ✅ Compatibility with all viewport
+  - ✅ Good website look
   - ▢ Deezer implementation
   - ▢ ...
