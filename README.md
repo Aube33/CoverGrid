@@ -15,7 +15,7 @@
 <img src="https://github.com/Aube33/Aube33.github.io/blob/main/illustrations/gridcover.png?raw=true" width="195" height="422"/>|<img src="https://github.com/Aube33/Aube33.github.io/blob/main/illustrations/gridcover-2.png?raw=true" width="195" height="422"/>|<img src="https://github.com/Aube33/Aube33.github.io/blob/main/illustrations/gridcover-3.png?raw=true" width="195" height="422"/>|<img src="https://github.com/Aube33/Aube33.github.io/blob/main/illustrations/gridcover-4.png?raw=true" width="195" height="422"/>
 
 **Desktop**:
-<img src="https://github.com/Aube33/Aube33.github.io/blob/main/illustrations/gridcover_desktop.png?raw=true" width="195" height="422"/>|<img src="https://github.com/Aube33/Aube33.github.io/blob/main/illustrations/gridcover_desktop-2.png?raw=true" width="195" height="422"/>|<img src="https://github.com/Aube33/Aube33.github.io/blob/main/illustrations/gridcover_desktop-3.png?raw=true" width="195" height="422"/>|<img src="https://github.com/Aube33/Aube33.github.io/blob/main/illustrations/gridcover_desktop-4.png?raw=true" width="195" height="422"/>
+<img src="https://github.com/Aube33/Aube33.github.io/blob/main/illustrations/gridcover_desktop.png?raw=true" width="422" height="195"/>
 
 
 ## ✅ **Roadmap** :
