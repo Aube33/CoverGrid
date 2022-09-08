@@ -73,7 +73,7 @@ if(DesktopMode){
     BTN_launchApp_sentences.push("Create my desktop wallpaper !");
 }
 else{
-    BTN_launchApp_sentences.push("Create my phone wallpaper !");
+    BTN_launchApp_sentences.push("My phone wallpaper !");
 }
 BTN_launchApp.innerHTML=BTN_launchApp_sentences[Math.floor(Math.random()*BTN_launchApp_sentences.length)]+"  <i class='fa-solid fa-arrow-right'></i>";
 //==========
