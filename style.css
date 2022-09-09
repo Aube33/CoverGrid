@@ -526,10 +526,10 @@ body:after{
     height: 10rem;
     padding: 0;
     width: 10rem;
-    border-radius: 50%;
+    border-radius: 15px;
 }
 #app-menu_settings input[type=color]::-webkit-color-swatch{
-    border-radius: 50%;
+    border-radius: 15px;
     border: 2px white solid;
 }
 #app-menu_settings button{
