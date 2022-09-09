@@ -20,7 +20,7 @@ var appMenu=document.getElementById("app-menu");
 var BTN_appMenu_OPEN=document.getElementById("btn-app-menu");
 var BTN_appMenu_CLOSE=document.getElementById("app-menu-close");
 
-var CHECK_appMenu_randomize=document.getElementById("app-playlist-random");
+var SELECT_appMenu_sort=document.getElementById("app-playlist-sort");
 
 var appContent=document.getElementById("app-content");
 
@@ -154,14 +154,17 @@ TEXT_appMenu_SPOTIFY.addEventListener("keydown", async function(e){
         }
     }
 
-    if(CHECK_appMenu_randomize.checked){
+    if(SELECT_appMenu_sort.value=="0"){
         for (let i = playlistUrls.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             const temp = playlistUrls[i];
             playlistUrls[i] = playlistUrls[j];
             playlistUrls[j] = temp;
         }
-    }    
+    }   
+    else if(SELECT_appMenu_sort.value=="2"){
+        playlistUrls=playlistUrls.reverse();
+    }  
 
     for(let c=0; c<playlistUrls.length && c<appContent.children.length; c++){
         var cover = document.createElement("img");
@@ -176,24 +179,8 @@ TEXT_appMenu_SPOTIFY.addEventListener("keydown", async function(e){
 
 
 //= Deezer integration =
-let trackLimit_Deezer=25
-const _getTokenDeezer = async () => {
-    const result = await fetch('https://accounts.spotify.com/api/token', {
-        method: 'POST',
-        headers: {
-            'Content-Type' : 'application/x-www-form-urlencoded', 
-            'Authorization' : 'Basic ' + btoa("84d18b8414d341ac955361219c178813" + ':' + "025864421624491990d474426b484749")
-        },
-        body: 'grant_type=client_credentials'
-    });
-
-    const data = await result.json();
-    return data.access_token;
-}
-
 async function getJsonPlaylistDeezer(playlistID, offset) {
-    //let token=await _getTokenDeezer()
-    let response = await fetch('https://cors-anywhere.herokuapp.com/https://api.deezer.com/playlist/'+playlistID+ "/tracks?index="+offset, {
+    let response = await fetch('https://cors-anywhere.herokuapp.com/https://api.deezer.com/playlist/'+playlistID+ "/tracks?index="+offset+"&limit="+trackLimit, {
         method: 'GET',
         'Access-Control-Allow-Origin': '*',
         'Accept': 'application/json',
@@ -212,11 +199,9 @@ TEXT_appMenu_DEEZEER.addEventListener("keydown", async function(e){
     playlistID=playlistID[playlistID.length-1];
     playlistID=playlistID.split("?")[0];
     let playlistData=await getJsonPlaylistDeezer(playlistID, 0);
-    console.log(playlistData)
-
-    if(playlistData.total>trackLimit_Deezer){
-        LoopsNeeded=Math.floor(playlistData.total/trackLimit_Deezer);
-        if(playlistData.total%trackLimit_Deezer!=0) LoopsNeeded+=1;
+    if(playlistData.total>trackLimit){
+        LoopsNeeded=Math.floor(playlistData.total/trackLimit);
+        if(playlistData.total%trackLimit!=0) LoopsNeeded+=1;
     }
 
     let playlistUrls=[];
@@ -230,14 +215,17 @@ TEXT_appMenu_DEEZEER.addEventListener("keydown", async function(e){
         }
     }
 
-    if(CHECK_appMenu_randomize.checked){
+    if(SELECT_appMenu_sort.value=="0"){
         for (let i = playlistUrls.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
             const temp = playlistUrls[i];
             playlistUrls[i] = playlistUrls[j];
             playlistUrls[j] = temp;
         }
-    }    
+    }   
+    else if(SELECT_appMenu_sort.value=="2"){
+        playlistUrls=playlistUrls.reverse();
+    }   
 
     for(let c=0; c<playlistUrls.length && c<appContent.children.length; c++){
         var cover = document.createElement("img");

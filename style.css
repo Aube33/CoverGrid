@@ -74,60 +74,16 @@ input[type=range]::-moz-range-thumb {
     cursor: pointer;
   }
 
-/*= Checkbox inputs =*/
-.check {
-    display: block;
-    position: relative;
-    padding-left: 30px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-.check input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  } 
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 23px;
-    width: 23px;
-    background-color: white;
-    border-radius: 2px;
-    border: none;
-  }
-.check:hover input ~ .checkmark {
-    background-color: var(--real-transparent);
-  }
-.check input:checked ~ .checkmark {
+/*= Selects inputs =*/
+select{
     background-color: var(--color-1);
-  }
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
-.check input:checked ~ .checkmark:after {
-    display: block;
-  }
-.check .checkmark:after {
-    left: 35%;
-    top: 20%;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
-  }
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
 
 @media (min-width:961px)  {
     ::-webkit-scrollbar {
