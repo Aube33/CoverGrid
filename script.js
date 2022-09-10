@@ -146,9 +146,9 @@ async function SpotifyPlaylist(){
     for(let l=0; l<LoopsNeeded; l++){
         let playlistData=await getJsonPlaylistSpotify(playlistID, l*trackLimit);
         let playlistItems=playlistData.items;
-            
+        
         for(let i=0; i<playlistItems.length; i++){
-            if(playlistUrls.includes(playlistItems[i].track.album.images[0].url)) continue;
+            if(playlistItems[i].track==null || playlistUrls.includes(playlistItems[i].track.album.images[0].url)) continue;
             playlistUrls.push(playlistItems[i].track.album.images[0].url)
         }
     }
