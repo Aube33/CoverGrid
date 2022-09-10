@@ -401,6 +401,7 @@ function makeRows(cellNumber) {
 makeRows((GridColumns*GridRows));
 
 var INPUT_ColumnsRange=document.getElementById("app-settings-columnsRange");
+var lastColumnValue=INPUT_ColumnsRange.value;
 INPUT_ColumnsRange.addEventListener("input", function(e) {
     document.getElementById("app-settings-columnsRange_label").innerHTML='Columns: '+INPUT_ColumnsRange.value;
 
@@ -416,8 +417,11 @@ INPUT_ColumnsRange.addEventListener("input", function(e) {
     let cellsToEdit=(GridColumns*GridRows)-appContent.childElementCount;
     makeRows(cellsToEdit);
 
-    if (lastPlaylistUsed=="spotify") SpotifyPlaylist();
-    else if(lastPlaylistUsed="deezer") DeezerPlaylist();
+    if(lastColumnValue<INPUT_ColumnsRange.value){
+        if (lastPlaylistUsed=="spotify") SpotifyPlaylist();
+        else if(lastPlaylistUsed="deezer") DeezerPlaylist();
+    }
+    lastColumnValue=INPUT_ColumnsRange.value;
 });
 
 //Gap
@@ -676,9 +680,26 @@ BTN_export.addEventListener("click", function(e){
             lastWidthtSize=coverImg.width*ExportQuality;
             lastHeightSize=coverImg.height*ExportQuality;
         }
-        if(posX>=canvas.width){
-            posX=0;
-            posY+=HeighToIncrement;
+
+        if(DesktopMode){
+            if(GapSize>0){
+                if(posX>canvas.width){
+                    posX=0;
+                    posY+=HeighToIncrement;
+                }
+            }
+            else{
+                if(posX+WidthToIncrement>canvas.width){
+                    posX=0;
+                    posY+=HeighToIncrement;
+                }
+            }
+        }
+        else{
+            if(posX>=canvas.width){
+                posX=0;
+                posY+=HeighToIncrement;
+            }     
         }
 
         if(coverImg==null){
