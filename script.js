@@ -137,21 +137,22 @@ async function SpotifyPlaylist(){
     playlistID=playlistID[playlistID.length-1];
     playlistID=playlistID.split("?")[0];
     let playlistData=await getJsonPlaylistSpotify(playlistID, 0);
+
     if(playlistData.total>trackLimit){
-        LoopsNeeded=Math.floor(playlistData.total/trackLimit);
-        if(playlistData.total%trackLimit!=0) LoopsNeeded+=1;
+        LoopsNeeded=Math.trunc(playlistData.total/trackLimit)+1;
     }
 
     let playlistUrls=[];
     for(let l=0; l<LoopsNeeded; l++){
-        let playlistData=await getJsonPlaylistSpotify(playlistID, l);
+        let playlistData=await getJsonPlaylistSpotify(playlistID, l*trackLimit);
         let playlistItems=playlistData.items;
-
+            
         for(let i=0; i<playlistItems.length; i++){
             if(playlistUrls.includes(playlistItems[i].track.album.images[0].url)) continue;
             playlistUrls.push(playlistItems[i].track.album.images[0].url)
         }
     }
+    console.log(playlistUrls[playlistUrls.length-1])
 
     if(SELECT_appMenu_sort.value=="0"){
         for (let i = playlistUrls.length - 1; i > 0; i--) {
@@ -177,8 +178,6 @@ async function SpotifyPlaylist(){
 
 var TEXT_appMenu_SPOTIFY = document.getElementById("app-spotify-playlist");
 TEXT_appMenu_SPOTIFY.addEventListener("change", async function(e){
-    //if(e.keyCode != 13) return;
-
     SpotifyPlaylist();
     lastPlaylistUsed="spotify";
 });
@@ -203,14 +202,14 @@ async function DeezerPlaylist(){
     playlistID=playlistID[playlistID.length-1];
     playlistID=playlistID.split("?")[0];
     let playlistData=await getJsonPlaylistDeezer(playlistID, 0);
+
     if(playlistData.total>trackLimit){
-        LoopsNeeded=Math.floor(playlistData.total/trackLimit);
-        if(playlistData.total%trackLimit!=0) LoopsNeeded+=1;
+        LoopsNeeded=Math.trunc(playlistData.total/trackLimit)+1;
     }
 
     let playlistUrls=[];
     for(let l=0; l<LoopsNeeded; l++){
-        let playlistData=await getJsonPlaylistDeezer(playlistID, l);
+        let playlistData=await getJsonPlaylistDeezer(playlistID, l*trackLimit);
         let playlistItems=playlistData.data;
 
         for(let i=0; i<playlistItems.length; i++){
@@ -243,8 +242,6 @@ async function DeezerPlaylist(){
 
 var TEXT_appMenu_DEEZEER = document.getElementById("app-deezer-playlist");
 TEXT_appMenu_DEEZEER.addEventListener("change", async function(e){
-    //if(e.keyCode != 13) return;
-
     DeezerPlaylist();
     lastPlaylistUsed="deezer";
 });
