@@ -152,7 +152,6 @@ async function SpotifyPlaylist(){
             playlistUrls.push(playlistItems[i].track.album.images[0].url)
         }
     }
-    console.log(playlistUrls[playlistUrls.length-1])
 
     if(SELECT_appMenu_sort.value=="0"){
         for (let i = playlistUrls.length - 1; i > 0; i--) {
