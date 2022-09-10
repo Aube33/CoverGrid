@@ -14,6 +14,8 @@ var AppFlipFlop=true;
 //======
 
 //=== App ===
+var lastPlaylistUsed=null;
+
 var appGlobal=document.getElementById("app"); //Main
 
 var appMenu=document.getElementById("app-menu");
@@ -128,10 +130,7 @@ async function getJsonPlaylistSpotify(playlistID, offset) {
     return data;
 }
 
-var TEXT_appMenu_SPOTIFY = document.getElementById("app-spotify-playlist");
-TEXT_appMenu_SPOTIFY.addEventListener("keydown", async function(e){
-    if(e.keyCode != 13) return;
-
+async function SpotifyPlaylist(){
     let LoopsNeeded=1;
 
     let playlistID=TEXT_appMenu_SPOTIFY.value.split("/");
@@ -174,6 +173,14 @@ TEXT_appMenu_SPOTIFY.addEventListener("keydown", async function(e){
         appContent.children[c].innerHTML="";
         appContent.children[c].appendChild(cover).className="grid-cell-cover";
     }
+}
+
+var TEXT_appMenu_SPOTIFY = document.getElementById("app-spotify-playlist");
+TEXT_appMenu_SPOTIFY.addEventListener("keydown", async function(e){
+    if(e.keyCode != 13) return;
+
+    SpotifyPlaylist();
+    lastPlaylistUsed="spotify";
 });
 
 
@@ -189,10 +196,7 @@ async function getJsonPlaylistDeezer(playlistID, offset) {
     return data;
 }
 
-var TEXT_appMenu_DEEZEER = document.getElementById("app-deezer-playlist");
-TEXT_appMenu_DEEZEER.addEventListener("keydown", async function(e){
-    if(e.keyCode != 13) return;
-
+async function DeezerPlaylist(){
     let LoopsNeeded=1;
 
     let playlistID=TEXT_appMenu_DEEZEER.value.split("/");
@@ -235,11 +239,26 @@ TEXT_appMenu_DEEZEER.addEventListener("keydown", async function(e){
         appContent.children[c].innerHTML="";
         appContent.children[c].appendChild(cover).className="grid-cell-cover";
     }
+}
+
+var TEXT_appMenu_DEEZEER = document.getElementById("app-deezer-playlist");
+TEXT_appMenu_DEEZEER.addEventListener("keydown", async function(e){
+    if(e.keyCode != 13) return;
+
+    DeezerPlaylist();
+    lastPlaylistUsed="deezer";
 });
 
 
 
 //= Settings =
+//Sort
+SELECT_appMenu_sort.addEventListener("change", function(e) {
+    if (lastPlaylistUsed=="spotify") SpotifyPlaylist();
+    else if(lastPlaylistUsed="deezer") DeezerPlaylist();
+    else return;
+});
+
 
 //Columns Value
 if(DesktopMode){
@@ -397,6 +416,8 @@ INPUT_ColumnsRange.addEventListener("input", function(e) {
     let cellsToEdit=(GridColumns*GridRows)-appContent.childElementCount;
     makeRows(cellsToEdit);
 
+    if (lastPlaylistUsed=="spotify") SpotifyPlaylist();
+    else if(lastPlaylistUsed="deezer") DeezerPlaylist();
 });
 
 //Gap
@@ -620,9 +641,13 @@ BTN_export.addEventListener("click", function(e){
     BTN_export.disabled=true;
 
     let ExportQuality=INPUT_exportQuality.value;
+    let GapSize=INPUT_gapSize.value*ExportQuality;
+    
+    let OneCoverSize=(appContent.firstElementChild.querySelector("img").height)*ExportQuality;
+    let maxHeight=((OneCoverSize+GapSize)*GridRows)-GapSize;
 
-    canvas.width=screen.width*ExportQuality;
-    canvas.height=screen.height*ExportQuality;
+    canvas.width=appContent.offsetWidth*ExportQuality;
+    canvas.height=maxHeight;
 
     ctx.fillStyle = appContent.style.backgroundColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -645,33 +670,23 @@ BTN_export.addEventListener("click", function(e){
             HeighToIncrement=lastHeightSize;
         }
         else {
-            if(DesktopMode){
-                WidthToIncrement=screen.width*ExportQuality/GridColumns;
-                HeighToIncrement=screen.height*ExportQuality/GridRows;
-            }
-            else{
-                WidthToIncrement=coverImg.width*ExportQuality;
-                HeighToIncrement=coverImg.height*ExportQuality;
-            }
+            WidthToIncrement=coverImg.width*ExportQuality+GapSize;
+            HeighToIncrement=coverImg.height*ExportQuality+GapSize;
 
             lastWidthtSize=coverImg.width*ExportQuality;
             lastHeightSize=coverImg.height*ExportQuality;
         }
-
         if(posX>=canvas.width){
             posX=0;
-            posY+=HeighToIncrement+INPUT_gapSize.value*ExportQuality;
-        }
-        if(posY>canvas.height){
-            posY=0;
+            posY+=HeighToIncrement;
         }
 
         if(coverImg==null){
-            posX+=WidthToIncrement+INPUT_gapSize.value*ExportQuality;
+            posX+=WidthToIncrement;
         }
         else{
             ctx.drawImage(coverImg, posX, posY, coverImg.width*ExportQuality, coverImg.height*ExportQuality);
-            posX+=WidthToIncrement+INPUT_gapSize.value*ExportQuality;
+            posX+=WidthToIncrement;
         }
         progressBar.value+=progressBarIncrementation;
     }
