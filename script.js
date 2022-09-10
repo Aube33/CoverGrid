@@ -14,7 +14,7 @@ var AppFlipFlop=true;
 //======
 
 //=== App ===
-var lastPlaylistUsed=null;
+var lastPlaylistUsed;
 
 var appGlobal=document.getElementById("app"); //Main
 
@@ -177,8 +177,10 @@ async function SpotifyPlaylist(){
 
 var TEXT_appMenu_SPOTIFY = document.getElementById("app-spotify-playlist");
 TEXT_appMenu_SPOTIFY.addEventListener("change", async function(e){
-    SpotifyPlaylist();
-    lastPlaylistUsed="spotify";
+    if(TEXT_appMenu_SPOTIFY.value.length>0){
+        SpotifyPlaylist();
+        lastPlaylistUsed="spotify";
+    }
 });
 
 
@@ -241,8 +243,10 @@ async function DeezerPlaylist(){
 
 var TEXT_appMenu_DEEZEER = document.getElementById("app-deezer-playlist");
 TEXT_appMenu_DEEZEER.addEventListener("change", async function(e){
-    DeezerPlaylist();
-    lastPlaylistUsed="deezer";
+    if(TEXT_appMenu_DEEZEER.value.length>0){
+        DeezerPlaylist();
+        lastPlaylistUsed="deezer";
+    }
 });
 
 
@@ -252,7 +256,6 @@ TEXT_appMenu_DEEZEER.addEventListener("change", async function(e){
 SELECT_appMenu_sort.addEventListener("change", function(e) {
     if (lastPlaylistUsed=="spotify") SpotifyPlaylist();
     else if(lastPlaylistUsed="deezer") DeezerPlaylist();
-    else return;
 });
 
 
