@@ -402,7 +402,7 @@ makeRows((GridColumns*GridRows));
 var INPUT_ColumnsRange=document.getElementById("app-settings-columnsRange");
 var lastColumnValue=INPUT_ColumnsRange.value;
 INPUT_ColumnsRange.addEventListener("input", function(e) {
-    document.getElementById("app-settings-columnsRange_label").innerHTML='Columns: '+INPUT_ColumnsRange.value;
+    document.getElementById("app-settings-columnsRange_label").innerHTML='Size: '+INPUT_ColumnsRange.value;
 
     if(DesktopMode){
         GridRows=parseInt(INPUT_ColumnsRange.value)+1;
