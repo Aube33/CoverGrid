@@ -146,7 +146,7 @@ async function SpotifyPlaylist(){
     for(let l=0; l<LoopsNeeded; l++){
         let playlistData=await getJsonPlaylistSpotify(playlistID, l*trackLimit);
         let playlistItems=playlistData.items;
-        
+
         for(let i=0; i<playlistItems.length; i++){
             if(playlistItems[i].track==null || playlistUrls.includes(playlistItems[i].track.album.images[0].url)) continue;
             playlistUrls.push(playlistItems[i].track.album.images[0].url)
@@ -214,7 +214,7 @@ async function DeezerPlaylist(){
         let playlistItems=playlistData.data;
 
         for(let i=0; i<playlistItems.length; i++){
-            if(playlistUrls.includes(playlistItems[i].album.cover_big)) continue;
+            if(playlistItems[i].album==null || playlistUrls.includes(playlistItems[i].album.cover_big)) continue;
             playlistUrls.push(playlistItems[i].album.cover_big)
         }
     }
