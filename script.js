@@ -176,8 +176,8 @@ async function SpotifyPlaylist(){
 }
 
 var TEXT_appMenu_SPOTIFY = document.getElementById("app-spotify-playlist");
-TEXT_appMenu_SPOTIFY.addEventListener("keydown", async function(e){
-    if(e.keyCode != 13) return;
+TEXT_appMenu_SPOTIFY.addEventListener("change", async function(e){
+    //if(e.keyCode != 13) return;
 
     SpotifyPlaylist();
     lastPlaylistUsed="spotify";
@@ -242,8 +242,8 @@ async function DeezerPlaylist(){
 }
 
 var TEXT_appMenu_DEEZEER = document.getElementById("app-deezer-playlist");
-TEXT_appMenu_DEEZEER.addEventListener("keydown", async function(e){
-    if(e.keyCode != 13) return;
+TEXT_appMenu_DEEZEER.addEventListener("change", async function(e){
+    //if(e.keyCode != 13) return;
 
     DeezerPlaylist();
     lastPlaylistUsed="deezer";
