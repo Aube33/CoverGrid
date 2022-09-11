@@ -445,10 +445,16 @@ INPUT_backgroundColor.addEventListener("input", function(e) {
 //Clear button
 var BTN_clearGrid=document.getElementById("app-settings-clear");
 BTN_clearGrid.addEventListener("click", function(e) {
+    BTN_clearGrid.disabled=true;
     for(let c=appContent.children.length; c>0; c--) {
         appContent.removeChild(appContent.lastElementChild);
     } 
     makeRows((GridColumns*GridRows));
+
+    function CooldownClear() {
+        BTN_clearGrid.disabled=false;
+    }
+    setTimeout(CooldownClear, 4000);
 });
 
 //Export quality
