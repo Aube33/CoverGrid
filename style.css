@@ -1,12 +1,13 @@
 /*===== Basics =====*/
 :root {
-    --primary-color: #1E1E1F;
-    --secondary-color: #f7f7f7;
-    --transparent-color: #cccccc;
-    --real-transparent: rgba(255, 255, 255, 0.2);
+    --primary-color: #EDECED;
+    --secondary-color: #1E1E1F;
+    --transparent-color: #DFDEDF;
+    --grey-color: #979797;
+    --real-transparent: rgba(30, 30, 31, 0.3);
 
-    --color-1: #1ed760;
-    --color-2: rgb(209, 41, 41);
+    --color-1: #84bb57;
+    --color-2: #bd4a55;
 
     --grid-cols: 4;
 }
@@ -25,6 +26,11 @@
     padding: 0;
     font-family: DejaVuSans;
 }
+
+a, a:hover, a:visited, a:active {
+    color: inherit;
+    text-decoration: none;
+   }
 
 input,textarea,button,select,a {
     outline: none;
@@ -52,7 +58,7 @@ input[type=range]{
     appearance: none;
     margin: 8px 0;
     width: 100%;
-    height: 5px;
+    height: 3px;
     border-radius: 10px;
     background: var(--real-transparent);
     outline: none;
@@ -63,7 +69,7 @@ input[type=range]::-webkit-slider-thumb {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: var(--color-1);
+    background: var(--grey-color);
     cursor: pointer;
   }
 input[type=range]::-moz-range-thumb {
@@ -76,12 +82,14 @@ input[type=range]::-moz-range-thumb {
 
 /*= Selects inputs =*/
 select{
-    background-color: var(--color-1);
+    background-color: var(--transparent-color);
+    color: var(--secondary-color);
     border: none;
     border-radius: 5px;
     padding: 5px;
     font-weight: 500;
-    font-size: 1rem;
+    font-size: 1.1rem;
+    cursor: pointer;
 }
 
 
@@ -108,14 +116,14 @@ select{
 }
 
 .title{
-    color: white;
+    color: var(--secondary-color);
     font-family: Grid;
     font-size: 5.5rem;
     text-align: center;
 }
 @media (min-width:961px)  {
     .title{
-        color: white;
+        color: var(--secondary-color);
         font-family: Grid;
         font-size: 7rem;
         text-align: center;
@@ -123,16 +131,17 @@ select{
 }
 
 hr{
-    border: 2px solid var(--transparent-color);
+    border: 2px solid var(--real-transparent);
     border-radius: 5px;
     width: 10%;
     margin: 30px 0;
 }
 
 .btn{
-    background-color: white;
+    background-color: var(--transparent-color);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     border: none;
-    color: black;
+    color: var(--secondary-color);
     padding: 15px 32px;
     text-align: center;
     font-size: 1.1rem;
@@ -426,6 +435,7 @@ body:after{
     right: 100%;
     top: 0;
     transition: right 0.2s;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 @media (min-width:961px)  {
     #app-menu{
@@ -459,7 +469,7 @@ body:after{
 #app-menu #app-menu-example{
     display: grid;
     justify-content: center;
-    gap: 0px;
+    gap: 0;
     grid-template-columns: repeat(3, 1fr);
     grid-auto-rows: 2, 1fr;
     width: 90%;
@@ -471,39 +481,24 @@ body:after{
     margin-top: 10%;
 }
 #app-menu-example>div{
-    background-color: var(--secondary-color);
-    box-shadow: rgba(194, 194, 194, 0.4) 5px 5px;
+    background-color: var(--transparent-color);
+    box-shadow: rgba(136, 136, 136, 0.4) 5px 5px;
     aspect-ratio: 1;
-    border: 2px var(--transparent-color) solid;
+    border: 1px var(--real-transparent) solid;
 }
 
 
-/*= Spotify Integration =*/
-#app-menu #app-menu_spotify{
+/*= Playlists Integration =*/
+#app-menu #app-menu_spotify, #app-menu #app-menu_deezer{
     margin-top: 5%;
     margin-bottom: 5%;
 }
-#app-menu #app-menu_spotify input[type="text"]{
+#app-menu #app-menu_spotify input[type="text"], #app-menu #app-menu_deezer input[type="text"]{
     width: 80%;
     font-family: DejaVuSans;
     font-weight: bold;
     border-radius: 8px;
-    border: none;
-    padding: 7px 7px;
-    margin-bottom: 15px;
-}
-
-/*= Deezer Integration =*/
-#app-menu #app-menu_deezer{
-    margin-top: 5%;
-    margin-bottom: 5%;
-}
-#app-menu #app-menu_deezer input[type="text"]{
-    width: 80%;
-    font-family: DejaVuSans;
-    font-weight: bold;
-    border-radius: 8px;
-    border: none;
+    border: 2px var(--real-transparent) solid;
     padding: 7px 7px;
     margin-bottom: 15px;
 }
@@ -530,7 +525,7 @@ body:after{
 }
 #app-menu_settings input[type=color]::-webkit-color-swatch{
     border-radius: 15px;
-    border: 2px white solid;
+    border: 2px var(--transparent-color) solid;
 }
 #app-menu_settings button{
     font-size: 1.5rem;
@@ -553,12 +548,12 @@ body:after{
 /*= Menu close =*/
 #app-menu-close{
     font-size: 1.7rem;
-    border-radius: 15px;
+    border-radius: 0;
     padding: 100% 8px;
     box-shadow: none;
     border-bottom-right-radius: 0;
     border-top-right-radius: 0;
-    background-color: var(--real-transparent);
+    background-color: none;
     color: var(--secondary-color);
 }
 /*======*/
@@ -687,11 +682,11 @@ body:after{
 }
 
 #app-selectionner #selectionner-select_list{
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     width: 90%;
     height: fit-content;
     max-height: 50%;
-
+    border: 1px var(--real-transparent) solid;
     position: absolute;
     top: 32%;
     display: none;
@@ -702,6 +697,7 @@ body:after{
     overflow: hidden;
     overflow-y: scroll;
     border-radius: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 @media (min-width:961px)  {
     #app-selectionner #selectionner-select_list{

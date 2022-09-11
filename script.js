@@ -176,7 +176,7 @@ async function SpotifyPlaylist(){
 }
 
 var TEXT_appMenu_SPOTIFY = document.getElementById("app-spotify-playlist");
-TEXT_appMenu_SPOTIFY.addEventListener("change", async function(e){
+TEXT_appMenu_SPOTIFY.addEventListener("focusout", async function(e){
     if(TEXT_appMenu_SPOTIFY.value.length>0){
         SpotifyPlaylist();
         lastPlaylistUsed="spotify";
@@ -242,7 +242,7 @@ async function DeezerPlaylist(){
 }
 
 var TEXT_appMenu_DEEZEER = document.getElementById("app-deezer-playlist");
-TEXT_appMenu_DEEZEER.addEventListener("change", async function(e){
+TEXT_appMenu_DEEZEER.addEventListener("focusout", async function(e){
     if(TEXT_appMenu_DEEZEER.value.length>0){
         DeezerPlaylist();
         lastPlaylistUsed="deezer";
@@ -658,7 +658,7 @@ BTN_export.addEventListener("click", function(e){
     canvas.width=appContent.offsetWidth*ExportQuality;
     canvas.height=maxHeight;
 
-    ctx.fillStyle = appContent.style.backgroundColor;
+    ctx.fillStyle = INPUT_backgroundColor.value;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     let posX=0;
