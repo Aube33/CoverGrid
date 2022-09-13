@@ -19,5 +19,6 @@
   - ✅ Export quality parameter
   - ✅ Compatibility with all viewport
   - ✅ Good website look
-  - ▢ Deezer implementation
+  - ✅ Spotify implementation
+  - ✅ Deezer implementation
   - ▢ ...
