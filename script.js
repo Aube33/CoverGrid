@@ -186,60 +186,42 @@ TEXT_appMenu_SPOTIFY.addEventListener("focusout", async function(e){
 
 
 //= Deezer integration =
-async function getJsonPlaylistDeezer(playlistID, offset) {
-    let response = await fetch('https://cors-anywhere.herokuapp.com/http://api.deezer.com/playlist/'+playlistID+ "/tracks?index="+offset+"&limit="+trackLimit+"&request_method=GET", {
-        'Access-Control-Allow-Credentials' : true,
-        'Access-Control-Allow-Origin':'*',
-        'Access-Control-Allow-Methods':'GET',
-        'Access-Control-Allow-Headers':'application/json',
-    })
-    let data = await response.json();
-    return data;
-}
-
 async function DeezerPlaylist(){
-    let LoopsNeeded=1;
-
     let playlistID=TEXT_appMenu_DEEZEER.value.split("/");
     playlistID=playlistID[playlistID.length-1];
     playlistID=playlistID.split("?")[0];
-    let playlistData=await getJsonPlaylistDeezer(playlistID, 0);
 
-    if(playlistData.total>trackLimit){
-        LoopsNeeded=Math.trunc(playlistData.total/trackLimit)+1;
-    }
-
-    let playlistUrls=[];
-    for(let l=0; l<LoopsNeeded; l++){
-        let playlistData=await getJsonPlaylistDeezer(playlistID, l*trackLimit);
+    DZ.api("playlist/"+playlistID+ "/tracks?limit="+250, function(response){
+        let playlistData=response;
         let playlistItems=playlistData.data;
+        let playlistUrls=[];
 
         for(let i=0; i<playlistItems.length; i++){
             if(playlistItems[i].album==null || playlistUrls.includes(playlistItems[i].album.cover_big)) continue;
             playlistUrls.push(playlistItems[i].album.cover_big)
         }
-    }
-
-    if(SELECT_appMenu_sort.value=="0"){
-        for (let i = playlistUrls.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            const temp = playlistUrls[i];
-            playlistUrls[i] = playlistUrls[j];
-            playlistUrls[j] = temp;
+    
+        if(SELECT_appMenu_sort.value=="0"){
+            for (let i = playlistUrls.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                const temp = playlistUrls[i];
+                playlistUrls[i] = playlistUrls[j];
+                playlistUrls[j] = temp;
+            }
+        }   
+        else if(SELECT_appMenu_sort.value=="2"){
+            playlistUrls=playlistUrls.reverse();
+        }   
+    
+        for(let c=0; c<playlistUrls.length && c<appContent.children.length; c++){
+            var cover = document.createElement("img");
+            var cover=new Image();
+            cover.crossOrigin="anonymous";
+            cover.src=playlistUrls[c];
+            appContent.children[c].innerHTML="";
+            appContent.children[c].appendChild(cover).className="grid-cell-cover";
         }
-    }   
-    else if(SELECT_appMenu_sort.value=="2"){
-        playlistUrls=playlistUrls.reverse();
-    }   
-
-    for(let c=0; c<playlistUrls.length && c<appContent.children.length; c++){
-        var cover = document.createElement("img");
-        var cover=new Image();
-        cover.crossOrigin="anonymous";
-        cover.src=playlistUrls[c];
-        appContent.children[c].innerHTML="";
-        appContent.children[c].appendChild(cover).className="grid-cell-cover";
-    }
+    })
 }
 
 var TEXT_appMenu_DEEZEER = document.getElementById("app-deezer-playlist");
@@ -276,7 +258,6 @@ root.style.setProperty('--grid-cols', GridColumns.toString());
 
 function makeRows(cellNumber) {
     let Cell_HoldingTimeout;
-    let Cell_LongTouch;
     let Cell_LongSelected=null;
 
     if(cellNumber>0){

@@ -19,6 +19,14 @@
         <link rel="icon" type="image/png" href="img/favicon.png"/>
     </head>
     <body>
+        <div id="dz-root"></div>
+        <script src="https://e-cdn-files.dzcdn.net/js/min/dz.js"></script>
+        <script>
+            DZ.init({
+                appId  : '558362',
+                channelUrl : 'http://aube33.github.io'
+            });
+        </script>
         <div class="content">
             <div id="loader"><progress id="loader-progressBar" max="100" value="0"></progress></div>
 
@@ -55,23 +63,6 @@
                             <div></div>
                             <div></div>
                         </div>
-
-                        <div id="donate-button-container" style="margin-bottom: 50px;">
-                            <div id="donate-button"></div>
-                            <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
-                            <script>
-                                PayPal.Donation.Button({
-                                    env:'production',
-                                    hosted_button_id:'2JYXTUHK7LUPE',
-                                    image: {
-                                        src:'https://amigurumibb.com/wp-content/uploads/2018/03/PayPal-Donate-Button-Transparent.png',
-                                        alt:'Donate with PayPal button',
-                                        title:'PayPal - The safer, easier way to pay online!',
-                                    }
-                                }).render('#donate-button');
-                            </script>
-                        </div>
-
                         <p class="category"><i class="fa-brands fa-spotify"></i> Spotify</p>
                         <div class="group" id="app-menu_spotify">
                             <input type="text" id="app-spotify-playlist" placeholder="Spotify playlist URL">
@@ -80,7 +71,6 @@
                         <p class="category"><i class="fa-brands fa-deezer"></i> Deezer</p>
                         <div class="group" id="app-menu_deezer" style="margin-bottom: 10%;">
                             <input type="text" id="app-deezer-playlist" placeholder="Deezer public playlist URL">
-                            <u><a href="https://cors-anywhere.herokuapp.com/corsdemo" target="_blank"><i class="fa-solid fa-bug"></i> Click here and request access</a></u>
                         </div>
 
                         <div class="container">
@@ -114,7 +104,24 @@
                         </div>
                         <hr>
                         <button class="btn menu" id="app-menu-home"><i class="fa-solid fa-house" style="margin-bottom: 50%;"></i> Home</button>
+
+                        <div id="donate-button-container" style="margin-bottom: 40px;">
+                            <div id="donate-button"></div>
+                            <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
+                            <script>
+                                PayPal.Donation.Button({
+                                    env:'production',
+                                    hosted_button_id:'2JYXTUHK7LUPE',
+                                    image: {
+                                        src:'img/givememoney.png',
+                                        alt:"Click and don't ask question",
+                                        title:'PayPal - The safer, easier way to pay online!',
+                                    }
+                                }).render('#donate-button');
+                            </script>
+                        </div>
                     </div>
+                    
                     <button id="app-menu-close" class="btn"><i class="fa-solid fa-chevron-left"></i></button>
                 </div>
                 <div id="app-content">

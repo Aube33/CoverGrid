@@ -47,6 +47,15 @@ label{
     margin-bottom: 3px;
 }
 
+img {  
+    user-drag: none;  
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+ }
+
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button {  
    appearance: none;
@@ -92,21 +101,9 @@ select{
     cursor: pointer;
 }
 
-
 @media (min-width:961px)  {
     ::-webkit-scrollbar {
-    width: 7px;
-  }
-  ::-webkit-scrollbar-track {
-    background: none;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: var(--real-transparent);
-    border: none;
-    border-radius: 10px;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    width: 0px;
   }
 }
 
