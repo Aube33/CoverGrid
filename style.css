@@ -613,7 +613,7 @@ body:after{
     
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 #app-selectionner .group{
@@ -627,7 +627,7 @@ body:after{
     padding: 20px 0;
     border-radius: 10px;
     height: fit-content;
-    margin-bottom: 20%;
+    margin-top: 50px;
 }
 @media (min-width:961px)  {
     #app-selectionner .group{
@@ -682,7 +682,7 @@ body:after{
     background-color: var(--primary-color);
     width: 90%;
     height: fit-content;
-    max-height: 50%;
+    max-height: 60%;
     border: 1px var(--real-transparent) solid;
     position: absolute;
     top: 32%;
