@@ -14,10 +14,10 @@
 
 
 ## ✅ **Roadmap** :
-  - ✅ Better background color picker
-  - ✅ Export quality parameter
-  - ✅ Compatibility with all viewport
-  - ✅ Good website look
-  - ✅ Spotify implementation
-  - ✅ Deezer implementation
-  - ▢ ...
+  - * [x] Better background color picker
+  - * [x] Export quality parameter
+  - * [x] Compatibility with all viewport
+  - * [x] Good website look
+  - * [x] Spotify implementation
+  - * [x] Deezer implementation
+  - * [ ] ...
