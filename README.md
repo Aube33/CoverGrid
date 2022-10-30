@@ -5,7 +5,6 @@
 
 ## ⚠️ **Warning** :
   - This project is currently in beta, some bugs can appears during your creation !
-  - Only phone wallpapers are working for the moment !
 
 ## 🌐 **Website** :
   **→** [Click on me](https://aube33.github.io) to access !
