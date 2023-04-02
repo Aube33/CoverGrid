@@ -633,8 +633,15 @@ BTN_export.addEventListener("click", function(e){
 
     let ExportQuality=INPUT_exportQuality.value;
     let GapSize=INPUT_gapSize.value*ExportQuality;
+
+    let OneCoverSize=0;
+    for (let i = 0; i<appContent.children.length; i++) {
+        if(appContent.children[i].firstElementChild!=null){
+            OneCoverSize=(appContent.children[i].querySelector("img").height)*ExportQuality;
+            break
+        }
+    }
     
-    let OneCoverSize=(appContent.firstElementChild.querySelector("img").height)*ExportQuality;
     let maxHeight=((OneCoverSize+GapSize)*GridRows)-GapSize;
 
     canvas.width=appContent.offsetWidth*ExportQuality;
